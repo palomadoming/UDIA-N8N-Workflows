@@ -1,0 +1,103 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Wordpress",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wordpress": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-14T15:40:34.423Z",
+  "id": "YUPpreUTBCRyyoAS",
+  "meta": null,
+  "name": "[UDIA] Publicar post en WordPress + Imagen",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        -40
+      ],
+      "id": "e86ed0d0-9977-416a-8356-d7f54d0c9b24",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.wordpress",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        -40
+      ],
+      "id": "891f7e92-41b5-4afc-a07b-a34636108a59",
+      "name": "Wordpress"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        20,
+        -40
+      ],
+      "id": "84713d1b-03a4-42a5-850b-829c922f8736",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        200,
+        -40
+      ],
+      "id": "5f717e82-b7a2-4760-be26-c4c000da50c8",
+      "name": "HTTP Request1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-14T15:49:37.000Z",
+  "versionId": "2fbf1754-5856-4fad-a743-49fd919511f9"
+}
