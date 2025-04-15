@@ -1,0 +1,98 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-10T17:59:57.170Z",
+  "id": "xLEp047UAZ9Sli03",
+  "meta": null,
+  "name": "[UDIA] Nodo funciones",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        -20
+      ],
+      "id": "bd636f0f-e7dc-4eb4-9251-f4d8c10bfccc",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://www.techradar.com/rss",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        60,
+        -20
+      ],
+      "id": "7d2e6985-5ae4-49c3-ad01-c297bef44dc2",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const html = item.json['content:encoded'] || item.json.content?.['content:encoded'] || '';\n\n  // Regex para extraer el primer <img src=\"...\">\n  const match = html.match(/<img[^>]+src=[\"']([^\"']+)[\"']/i);\n  const image = match ? match[1] : null;\n\n  // Agregamos la propiedad \"image\" al item original\n  return {\n    json: {\n      ...item.json,\n      image: image\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        340,
+        -220
+      ],
+      "id": "5d581bc1-2044-4017-ac49-d3cdedc5cba8",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const title = item.json.title || '';\n\n  // Normalizamos ambos a minúsculas\n  if (title.toLowerCase().includes('openai'.toLowerCase())) {\n    item.json.title = `UDIA: ${title}`;\n  }\n\n  return item;\n});\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        340,
+        40
+      ],
+      "id": "4e5d5cd1-b614-43ae-a04d-e2eb16ab49cf",
+      "name": "Code1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-10T18:21:47.000Z",
+  "versionId": "fe4f6b32-0d31-4a7e-9777-c4b36f18db4e"
+}
