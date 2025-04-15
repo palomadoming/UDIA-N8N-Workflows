@@ -1,0 +1,145 @@
+{
+  "active": false,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-08T12:42:06.957Z",
+  "id": "rOUpBLSpDUmWN81j",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "UDIA prueba 0",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Newsletter Udia N8N",
+        "formDescription": "Las últimas noticias de N8N en tu email",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nombre",
+              "placeholder": "Aquí tu nombre",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "email",
+              "fieldType": "email",
+              "placeholder": "Tu email",
+              "requiredField": true
+            },
+            {
+              "fieldType": "html",
+              "html": "<input type=\"checkbox\" name=\"aceptar\" required>\n    Acepto la <a href=\"/politica-de-privacidad\" target=\"_blank\">política de privacidad</a>.\n\n\n"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "445115ab-a01f-4ed9-9356-f29c4b6a0011",
+      "name": "On form submission",
+      "webhookId": "c6f033e6-d223-445c-921a-743b3d321d9e"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1oycuwQSojDpCuB3ilkvYg9-DfLJBGxYQ9xXjLe0q4os/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oycuwQSojDpCuB3ilkvYg9-DfLJBGxYQ9xXjLe0q4os/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json.email }}",
+            "Nombre": "={{ $json.Nombre }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        220,
+        0
+      ],
+      "id": "ab5b2dbb-8aba-4189-bdda-3443e5ec6a18",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "CADKbhjecIJbmaXD",
+          "name": "Google Sheets account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-04-08T12:43:31.643Z",
+      "updatedAt": "2025-04-08T12:43:31.643Z",
+      "id": "EXQmzli0NTchfCGh",
+      "name": "❤️Udia 🧠Experimento"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-09T15:37:43.000Z",
+  "versionId": "429ad0ae-fd31-4020-9614-b2f9b917375e"
+}
