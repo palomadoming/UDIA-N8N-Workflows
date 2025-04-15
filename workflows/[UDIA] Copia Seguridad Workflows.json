@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "On clicking 'execute'": {
       "main": [
@@ -458,11 +458,13 @@
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-04-15T15:50:48.000Z",
-  "versionId": "a1f684e7-667c-4e82-86cb-4d6a8dabb229"
+  "triggerCount": 1,
+  "updatedAt": "2025-04-15T15:54:20.000Z",
+  "versionId": "23ff7e1d-124b-462a-a8cc-003e005d31f9"
 }
