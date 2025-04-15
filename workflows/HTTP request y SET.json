@@ -1,0 +1,124 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Variables": {
+      "main": [
+        [
+          {
+            "node": "Exercise",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-09T15:49:03.875Z",
+  "id": "wFRORHzMxzcTCAMZ",
+  "meta": null,
+  "name": "HTTP request y SET",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        0
+      ],
+      "id": "518f6817-7843-4698-84fc-edf9853f5b3d",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}/exercises",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "=limit",
+              "value": "={{ $json.limit }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-rapidapi-host",
+              "value": "exercisedb.p.rapidapi.com"
+            },
+            {
+              "name": "x-rapidapi-key",
+              "value": "={{ $json.apikey }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        -160
+      ],
+      "id": "f2ae07a5-1b48-4c12-b3d5-8d883267ade2",
+      "name": "Exercise"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9788304a-82f3-465e-9ee3-fe58a319dcd3",
+              "name": "url",
+              "value": "https://exercisedb.p.rapidapi.com",
+              "type": "string"
+            },
+            {
+              "id": "a61dd87d-89c3-4a4e-9c69-bcad79f93691",
+              "name": "limit",
+              "value": "2",
+              "type": "string"
+            },
+            {
+              "id": "b1a492ef-d676-4dae-93be-8787077b81bf",
+              "name": "apikey",
+              "value": "035e0c4c3cmsh7111440c4227ee2p1cacc8jsn41a988f40a55",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        20,
+        0
+      ],
+      "id": "dc8b70dc-a938-4e05-bfc8-898fbb79e2af",
+      "name": "Variables"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-09T16:00:49.000Z",
+  "versionId": "aa42756d-ad5d-4187-a02e-dcbb493cc74c"
+}
