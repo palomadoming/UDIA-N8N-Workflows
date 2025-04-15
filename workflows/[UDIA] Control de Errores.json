@@ -1,0 +1,123 @@
+{
+  "active": false,
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-10T18:23:37.941Z",
+  "id": "g1mLyDE0pGclnmxh",
+  "meta": null,
+  "name": "[UDIA] Control de Errores",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "382a9772-0afc-4c40-b456-797340806e48",
+              "leftValue": "={{ $json.chatInput }}",
+              "rightValue": "hola",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        180,
+        0
+      ],
+      "id": "9fee4b6d-9766-4917-a9b2-dfde0c8eac4b",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        480,
+        -220
+      ],
+      "id": "7fdfcaf1-2ce9-4b95-bef0-ee5bb3876499",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "errorMessage": "¡Ha ocurrido un error! Te enviamos un telegram"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        520,
+        80
+      ],
+      "id": "68877f38-3ab5-4647-802d-ebb0b326d1ac",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -100,
+        0
+      ],
+      "id": "1ca99b50-3162-43b2-9129-43c53bc783de",
+      "name": "When chat message received",
+      "webhookId": "4a32bdce-0898-4682-ae0b-0b3f4fe7c4dc"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "bYK6lr8uDfu5acRl"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-11T11:25:18.000Z",
+  "versionId": "c6fda472-ef60-42aa-b1b5-796f0687e39b"
+}
