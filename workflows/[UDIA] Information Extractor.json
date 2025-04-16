@@ -1,0 +1,111 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-16T11:29:58.492Z",
+  "id": "FHjNyTVLgFWbZn8N",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "[UDIA] Information Extractor",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "91be094e-48c8-43f2-bdc9-9a97a37a388e",
+      "name": "When chat message received",
+      "webhookId": "24b0fab0-7c46-4876-8d1e-9b4a4a071208"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.chatInput }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "nombre_empresa",
+              "description": "es el nombre de la empresa indicadda",
+              "required": true
+            },
+            {
+              "name": "importe",
+              "description": "importe de la venta o la compra de la factura",
+              "required": true
+            },
+            {
+              "name": "tipo_operacion",
+              "description": "indicar si es un GASTO o un INGRESO",
+              "required": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "3ca64881-ef3b-4edd-86b0-6d7114ed5926",
+      "name": "Information Extractor"
+    },
+    {
+      "parameters": {
+        "model": "llama3.2:latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        200,
+        180
+      ],
+      "id": "bccf29db-4f08-47c1-8b39-f9e152c2147d",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "8qYsMYcWBjtIdjLk",
+          "name": "Ollama account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-16T11:38:11.000Z",
+  "versionId": "b97f8b7f-69d8-427f-b842-6cae028b3d37"
+}
