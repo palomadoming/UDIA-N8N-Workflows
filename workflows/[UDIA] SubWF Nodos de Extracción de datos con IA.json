@@ -1,0 +1,211 @@
+{
+  "active": false,
+  "connections": {
+    "Workflow Input Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "Accedo al producto": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Accedo al producto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-16T08:45:33.553Z",
+  "id": "oi6qqYfkd4rVleyt",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "[UDIA] SubWF Nodos de Extracción de datos con IA",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -520,
+        380
+      ],
+      "id": "89df447b-0b98-4003-ab6a-d56c290cd0ef",
+      "name": "Workflow Input Trigger",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "=https://mascotalandia.es/26--natura-diet-daily-food-12kg-pienso-para-perros-con-pollo-y-arroz.html",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -100,
+        220
+      ],
+      "id": "cda13d60-c49b-48e1-bc4e-1307f8692afd",
+      "name": "Test sin headers"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.loc }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n  \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36\",\n  \"Accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\n  \"Accept-Language\": \"en-US,en;q=0.5\",\n  \"Connection\": \"keep-alive\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -100,
+        380
+      ],
+      "id": "55453043-92ee-4fb8-9e0f-b4241c4f6b3c",
+      "name": "Accedo al producto"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "nombre",
+              "cssSelector": ".product_name"
+            },
+            {
+              "key": "marca",
+              "cssSelector": ".brand_centercolumn"
+            },
+            {
+              "key": "descripcion_corta",
+              "cssSelector": ".product-description"
+            },
+            {
+              "key": "descripcion_larga",
+              "cssSelector": ".info_content"
+            },
+            {
+              "key": "pvp",
+              "cssSelector": ".price_pvp"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        220
+      ],
+      "id": "08e78288-e216-4199-8e5a-10709fa11e86",
+      "name": "Datos"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n\"loc\": \n\"https://mascotalandia.es/26--natura-diet-daily-food-12kg-pienso-para-perros-con-pollo-y-arroz.html\",\n\"image:image\": \n{\n\"image:loc\": \n\"https://mascotalandia.es/38-large_default/natura-diet-daily-food-12kg-pienso-para-perros-con-pollo-y-arroz.jpg\"\n}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -300,
+        380
+      ],
+      "id": "2cb90be8-fc43-47d8-b4b3-2dd612cc265c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "text": "=Extrae toda la información del producto que te envío en html.\nTu debes devolver nombre, marca, descripción corta, descripción larga y precio\n\n {{ $json.data }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "nombre",
+              "description": "nombre del producto",
+              "required": true
+            },
+            {
+              "name": "descripcion_corta",
+              "description": "descripcion corta del producto",
+              "required": true
+            },
+            {
+              "name": "descripcion_larga",
+              "description": "descripcion larga del producto",
+              "required": true
+            },
+            {
+              "name": "precio",
+              "description": "precio del producto"
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "Eres un experto extrayendo información de productos de códigos html."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1,
+      "position": [
+        80,
+        380
+      ],
+      "id": "03ee74fc-b729-49b2-97dc-8e619570fee4",
+      "name": "Information Extractor"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-001",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        180,
+        580
+      ],
+      "id": "75e30274-e408-470a-9b62-1a3c86cab97d",
+      "name": "Google Gemini Chat Model"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-16T09:15:38.000Z",
+  "versionId": "b83dd374-3c39-4606-9d7f-056e277f7886"
+}
