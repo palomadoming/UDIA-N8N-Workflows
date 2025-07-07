@@ -46,7 +46,7 @@
     {
       "parameters": {
         "chatId": "={{ $json.message.chat.id }}",
-        "text": "=Eco:{{ $json.message.text }}",
+        "text": "=Eco: {{ $json.message.text }}",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -75,6 +75,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-09T16:21:30.000Z",
-  "versionId": "7d2aaf46-116b-4b55-841a-5ec49772348e"
+  "updatedAt": "2025-07-07T17:36:39.000Z",
+  "versionId": "53c5c866-9ea2-474f-a029-40c5e6fbd0cf"
 }
