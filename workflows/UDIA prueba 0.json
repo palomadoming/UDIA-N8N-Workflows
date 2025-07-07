@@ -118,8 +118,8 @@
       "name": "Google Sheets",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "CADKbhjecIJbmaXD",
-          "name": "Google Sheets account 2"
+          "id": "jqdFOpgmVpndnStL",
+          "name": "Google Sheets account 4"
         }
       }
     }
@@ -140,6 +140,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-04-09T15:37:43.000Z",
-  "versionId": "429ad0ae-fd31-4020-9614-b2f9b917375e"
+  "updatedAt": "2025-07-07T17:14:35.000Z",
+  "versionId": "edbfa0b1-dd73-4ff2-bfd5-d809de23a77c"
 }
