@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Pinecone Vector Store",
+            "node": "Google Drive1",
             "type": "main",
             "index": 0
           }
@@ -55,6 +55,17 @@
           }
         ]
       ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-11T12:44:57.439Z",
@@ -87,7 +98,7 @@
       "type": "n8n-nodes-base.googleDriveTrigger",
       "typeVersion": 1,
       "position": [
-        -120,
+        -240,
         -100
       ],
       "id": "9249a558-b01a-4a28-a8a1-85e55e3dc386",
@@ -104,18 +115,20 @@
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "1NWJ_lQAXII5TAfsDRa5KKeVcMN183h0039O-tzR-5ss",
+          "value": "1ecWhVIT_Vmtt6j0VR_tHAA0qWA7RAV3elxqrKSCerfU",
           "mode": "list",
-          "cachedResultName": "A LA CAZA DE ERRORES ORTOGRÁFICOS",
-          "cachedResultUrl": "https://docs.google.com/document/d/1NWJ_lQAXII5TAfsDRa5KKeVcMN183h0039O-tzR-5ss/edit?usp=drivesdk"
+          "cachedResultName": "INFORMACIÓN TIENDA MUNSURI",
+          "cachedResultUrl": "https://docs.google.com/document/d/1ecWhVIT_Vmtt6j0VR_tHAA0qWA7RAV3elxqrKSCerfU/edit?usp=drivesdk"
         },
-        "options": {}
+        "options": {
+          "fileName": ""
+        }
       },
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        100,
-        -100
+        20,
+        -160
       ],
       "id": "911c7a92-d767-4cfe-bce8-f79470d03ca9",
       "name": "Google Drive",
@@ -135,6 +148,7 @@
           "mode": "list",
           "cachedResultName": "ragudia"
         },
+        "embeddingBatchSize": null,
         "options": {
           "pineconeNamespace": "udia_rag"
         }
@@ -142,7 +156,7 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
       "typeVersion": 1.1,
       "position": [
-        320,
+        400,
         -100
       ],
       "id": "eea504c1-9ba6-4c70-9ca0-f2fa3ceb5d22",
@@ -161,11 +175,17 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        240,
+        360,
         100
       ],
       "id": "a11105de-e02c-470f-b370-f63d82d21e07",
-      "name": "Embeddings OpenAI"
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "rdJzH5xVW8BGATek",
+          "name": "OpenAi account 2"
+        }
+      }
     },
     {
       "parameters": {
@@ -174,7 +194,8 @@
           "metadata": {
             "metadataValues": [
               {
-                "name": "file"
+                "name": "file",
+                "value": "={{ $json.name }}"
               }
             ]
           }
@@ -183,7 +204,7 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1,
       "position": [
-        380,
+        500,
         100
       ],
       "id": "d3f1ec00-0937-4f07-8f19-e5a38ba4cd6f",
@@ -198,11 +219,38 @@
       "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
       "typeVersion": 1,
       "position": [
-        460,
+        500,
         240
       ],
       "id": "3575b62b-4c6f-40f2-aece-d32553242da2",
       "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1ycVXwkaGtEaPqzqOOnoWzvNjPKh8w3U96wZyd6xx_cI",
+          "mode": "list",
+          "cachedResultName": "INFORMACION GENERAL TIENDA MUNSURI",
+          "cachedResultUrl": "https://docs.google.com/document/d/1ycVXwkaGtEaPqzqOOnoWzvNjPKh8w3U96wZyd6xx_cI/edit?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        180,
+        -160
+      ],
+      "id": "e91d2e13-1790-4951-a394-f4c1cada00a4",
+      "name": "Google Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wiLRF9QPi18ANrOf",
+          "name": "Google Drive account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -212,6 +260,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-14T15:24:18.000Z",
-  "versionId": "48341b9c-dcdd-436a-971f-13abfea20da6"
+  "updatedAt": "2025-07-10T19:13:58.000Z",
+  "versionId": "b7757180-f82c-4314-9a09-9dff254b7d7b"
 }
