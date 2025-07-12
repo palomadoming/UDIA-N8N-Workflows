@@ -8,6 +8,11 @@
             "node": "Google Drive",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -16,7 +21,7 @@
       "main": [
         [
           {
-            "node": "Google Drive1",
+            "node": "Pinecone Vector Store",
             "type": "main",
             "index": 0
           }
@@ -66,6 +71,11 @@
           }
         ]
       ]
+    },
+    "Google Drive3": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2025-04-11T12:44:57.439Z",
@@ -98,7 +108,7 @@
       "type": "n8n-nodes-base.googleDriveTrigger",
       "typeVersion": 1,
       "position": [
-        -240,
+        -160,
         -100
       ],
       "id": "9249a558-b01a-4a28-a8a1-85e55e3dc386",
@@ -127,8 +137,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        20,
-        -160
+        100,
+        -100
       ],
       "id": "911c7a92-d767-4cfe-bce8-f79470d03ca9",
       "name": "Google Drive",
@@ -240,11 +250,32 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        180,
-        -160
+        100,
+        80
       ],
       "id": "e91d2e13-1790-4951-a394-f4c1cada00a4",
       "name": "Google Drive1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wiLRF9QPi18ANrOf",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        120,
+        360
+      ],
+      "id": "230ac391-45a0-4be9-b7c6-07662e1d0a08",
+      "name": "Google Drive3",
       "credentials": {
         "googleDriveOAuth2Api": {
           "id": "wiLRF9QPi18ANrOf",
@@ -260,6 +291,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-07-10T19:13:58.000Z",
-  "versionId": "b7757180-f82c-4314-9a09-9dff254b7d7b"
+  "updatedAt": "2025-07-12T13:58:42.000Z",
+  "versionId": "b40413dc-ef0a-446f-9440-2a1e1d70f5f6"
 }
