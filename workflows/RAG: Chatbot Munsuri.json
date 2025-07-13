@@ -1,0 +1,192 @@
+{
+  "active": true,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-16T10:41:28.975Z",
+  "id": "xS0e13of5MI1kBId",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RAG: Chatbot Munsuri",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Bienvenid@ a Munsuri!!\n¿En qué te puedo ayudar?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7c2679ee-fe1d-4c73-a256-cce6122b5288",
+      "name": "When chat message received",
+      "webhookId": "3e8b486f-bf6c-44ed-bacb-0b4e75e80638"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Eres un agente super amable que ayuda a las personas que buscan o están interesados en los bañadores de la marca y tienda online de Munsuri.\n\nEn la herramienta informacion_munsuri tienes toda la información sobre los productos de la tienda online."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        220,
+        0
+      ],
+      "id": "dab23c04-9ba2-452e-bfae-eb3e0d6bed77",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        320,
+        240
+      ],
+      "id": "1d7ae2ac-92f4-4447-9fb4-d537a2ddf526",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "informacion_munsuri",
+        "toolDescription": "Trabaja con tu pinecone vector store donde tienes toda la información sobre munsuri.com y lo que hacen. \nEsta es la URL de la página web: https://www.munsuri.com/",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "ragudia",
+          "mode": "list",
+          "cachedResultName": "ragudia"
+        },
+        "options": {
+          "pineconeNamespace": "udia_rag"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        480,
+        240
+      ],
+      "id": "857e06df-5b69-4da4-a622-dedb98830ee6",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "9GMgqQpVjtEp2Dxu",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        220
+      ],
+      "id": "e2e9abe0-5678-4f6c-b50d-28bae291c520",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "rdJzH5xVW8BGATek",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        580,
+        460
+      ],
+      "id": "fc057b36-f801-4576-af41-b244e76d32ac",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "rdJzH5xVW8BGATek",
+          "name": "OpenAi account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-13T10:34:39.000Z",
+  "versionId": "b3c4360d-97dc-4486-b4e5-a36663f0fc4e"
+}
