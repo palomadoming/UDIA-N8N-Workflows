@@ -55,6 +55,17 @@
           }
         ]
       ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-04-11T11:37:55.780Z",
@@ -144,7 +155,9 @@
       "parameters": {
         "promptType": "define",
         "text": "={{ $('When chat message received').item.json.chatInput }}",
-        "options": {}
+        "options": {
+          "systemMessage": "Eres un asistente que me ayuda a buscar en Google con la herramienta: API GOOGLE todas las url de la búsqueda que te pida por chat el usuario.\n\nSiempre contestarás únicamente el listado de url que venga de la herramienta API GOOGLE"
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.8,
@@ -279,6 +292,30 @@
           "name": "Google Sheets account 2"
         }
       }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        40
+      ],
+      "id": "afbece9d-157f-4fd0-93a1-ede6370ca532",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "rdJzH5xVW8BGATek",
+          "name": "OpenAi account 2"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -288,6 +325,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-11T12:25:35.000Z",
-  "versionId": "48ae2134-30bf-4756-8cd5-91a0eb57cdf7"
+  "updatedAt": "2025-07-14T15:23:40.000Z",
+  "versionId": "7101cb72-9826-4379-a322-32015bcbefc2"
 }
