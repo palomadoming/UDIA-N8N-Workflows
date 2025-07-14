@@ -70,7 +70,7 @@
             {
               "id": "62a85f8f-dbd4-4b99-b2b3-1e0afe432a2b",
               "leftValue": "={{ $json.chatInput }}",
-              "rightValue": "Hd",
+              "rightValue": "Ho",
               "operator": {
                 "type": "string",
                 "operation": "startsWith"
@@ -214,6 +214,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-04-10T17:28:23.000Z",
-  "versionId": "f3e6dfe3-bd8f-4d17-b7af-dc93f5e222fb"
+  "updatedAt": "2025-07-14T09:11:53.000Z",
+  "versionId": "d9e63c2d-bc99-474f-88cd-7676b874f8c5"
 }
