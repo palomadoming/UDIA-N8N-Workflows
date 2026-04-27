@@ -1,0 +1,1072 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message2": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message3": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-27T17:34:45.706Z",
+  "id": "HvsKUmVTX4bHZorf",
+  "isArchived": false,
+  "meta": null,
+  "name": "(UDIA 2) Action in app y human review - Ejercicio práctico",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Flujo de Datos UDIA",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nombre"
+            },
+            {
+              "fieldLabel": "Correo"
+            },
+            {
+              "fieldLabel": "Telefono"
+            },
+            {
+              "fieldLabel": "Edad",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Ciudad"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -896,
+        192
+      ],
+      "id": "6e8abe89-4eff-47d3-a4e1-c743532e7e76",
+      "name": "On form submission",
+      "webhookId": "053d8eb9-b5bf-4ff1-8890-4cc8367a0883"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2fc26c9b-c410-4769-9442-f70348332898",
+              "name": "Nombre",
+              "value": "={{ $json.Nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "542f160c-2589-409d-8b33-e53f22afb101",
+              "name": "Edad",
+              "value": "={{ $json.Edad }}",
+              "type": "number"
+            },
+            {
+              "id": "be082388-165f-4581-a829-cae64d5a473e",
+              "name": "Ciudad",
+              "value": "={{ $json.Ciudad }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -672,
+        192
+      ],
+      "id": "45ee524e-9473-4baa-8b2c-292608e6c1cb",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "330c8fd4-ff89-4842-8def-a9b7ca76bf2e",
+              "leftValue": "={{ $json.Edad }}",
+              "rightValue": 18,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -448,
+        192
+      ],
+      "id": "0c4b0c8e-8449-4f57-a856-f7fa9f89113f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6bd48c97-9204-4896-912d-c0311ba1a0ff",
+              "name": "Mensaje",
+              "value": "=Lo siento  {{ $('On form submission').item.json.Nombre }}, tienes {{ $('On form submission').item.json.Edad }} por lo que eres menor de edad y no puedes continuar",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        400
+      ],
+      "id": "492cef6d-58c1-4fc0-8223-f022521b4ccb",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Ciudad }}",
+                    "rightValue": "Madrid",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d12e8cc5-3a61-4b30-a87d-1cf05158d49c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Madrid"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fbac2132-a77c-4bde-af77-cdee03cf00ab",
+                    "leftValue": "={{ $json.Ciudad }}",
+                    "rightValue": "Barcelona",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Barcelona"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "513bb4f3-8ef3-45b7-9d62-b82f6058e5b6",
+                    "leftValue": "={{ $json.Ciudad }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "regex"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Otro"
+            }
+          ]
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        80
+      ],
+      "id": "39c83fa9-c2a2-4d95-a6fc-0b548d64928d",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json.Correo }}",
+        "subject": "Hola",
+        "message": "=Lo siento  {{ $('Edit Fields').item.json.Nombre }} pero no puedes participar ",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        400
+      ],
+      "id": "52f13f04-82d4-4eee-91e2-106b142610b8",
+      "name": "Send a message",
+      "webhookId": "c0818613-e2e5-445e-b56e-865b26830d0b"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1dPljvkNshyqDw8Th_u10rSUlTRTGnPPYgFQk9ZcpTLI",
+          "mode": "list",
+          "cachedResultName": "Formación UDIA Clase 5 Bloque 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dPljvkNshyqDw8Th_u10rSUlTRTGnPPYgFQk9ZcpTLI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dPljvkNshyqDw8Th_u10rSUlTRTGnPPYgFQk9ZcpTLI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $json.Nombre }}",
+            "Edad": "={{ $json.Edad }}",
+            "Ciudad": "={{ $json.Ciudad }}",
+            "Correo": "={{ $('On form submission').item.json.Correo }}",
+            "Telefono": "={{ $('On form submission').item.json.Telefono }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Correo",
+              "displayName": "Correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Edad",
+              "displayName": "Edad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Ciudad",
+              "displayName": "Ciudad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8eef8a98-8594-408b-a7a4-423118e0cd3a",
+      "name": "Append row in sheet"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json.Correo }}",
+        "subject": "Hola",
+        "message": "=Hola {{ $json.Nombre }}! Hemos registrado tus datos y te llamaremos pronto. Saludos",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "31ab1879-e08e-4af2-b557-d4a2d91db4c8",
+      "name": "Send a message1",
+      "webhookId": "c0818613-e2e5-445e-b56e-865b26830d0b"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appowS2apq0B23JvP",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblnKTfS7uPay5vpj",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Edad": "={{ $json.Edad }}",
+            "Nombre": "={{ $json.Nombre }}",
+            "Ciudad": "={{ $json.Ciudad }}",
+            "correo": "={{ $('On form submission').item.json.Correo }}",
+            "telefono": "={{ $('On form submission').item.json.Telefono }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Edad",
+              "displayName": "Edad",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Ciudad",
+              "displayName": "Ciudad",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        192
+      ],
+      "id": "d503a647-988b-4797-b06e-96592cd0c6fd",
+      "name": "Create a record"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "authentication": "airtableTokenApi",
+        "baseId": {
+          "__rl": true,
+          "value": "appowS2apq0B23JvP",
+          "mode": "id"
+        },
+        "tableId": {
+          "__rl": true,
+          "value": "tblnKTfS7uPay5vpj",
+          "mode": "id"
+        },
+        "triggerField": "Nombre",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.airtableTrigger",
+      "typeVersion": 1,
+      "position": [
+        -896,
+        624
+      ],
+      "id": "a559eb27-6227-459d-9db6-f0c6fb5a0c4d",
+      "name": "Airtable Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7732acba-b85a-4aeb-8fea-ce605951d88b",
+              "name": "fields.Nombre",
+              "value": "={{ $json.fields.Nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "ca66252d-9508-43d5-9440-8b3bfb31f4b4",
+              "name": "fields.correo",
+              "value": "={{ $json.fields.correo }}",
+              "type": "string"
+            },
+            {
+              "id": "5df5ab94-28dc-4b38-87ec-8bf9d60a4d1b",
+              "name": "fields.telefono",
+              "value": "={{ $json.fields.telefono }}",
+              "type": "string"
+            },
+            {
+              "id": "ce531417-723b-41f7-a14e-def2f8202386",
+              "name": "fields.Edad",
+              "value": "={{ $json.fields.Edad }}",
+              "type": "number"
+            },
+            {
+              "id": "96fe5870-4266-4d58-a9dc-fb44cdd62c68",
+              "name": "fields.Ciudad",
+              "value": "={{ $json.fields.Ciudad }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -672,
+        624
+      ],
+      "id": "7fcb1b09-b036-4f61-be47-bdbcf506ee03",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1dPljvkNshyqDw8Th_u10rSUlTRTGnPPYgFQk9ZcpTLI",
+          "mode": "list",
+          "cachedResultName": "Formación UDIA Clase 5 Bloque 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dPljvkNshyqDw8Th_u10rSUlTRTGnPPYgFQk9ZcpTLI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dPljvkNshyqDw8Th_u10rSUlTRTGnPPYgFQk9ZcpTLI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $json.fields.Nombre }}",
+            "Correo": "={{ $json.fields.correo }}",
+            "Telefono": "={{ $json.fields.telefono }}",
+            "Edad": "={{ $json.fields.Edad }}",
+            "Ciudad": "={{ $json.fields.Ciudad }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Correo",
+              "displayName": "Correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Edad",
+              "displayName": "Edad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Ciudad",
+              "displayName": "Ciudad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -448,
+        624
+      ],
+      "id": "cf3cc973-1d2e-4d41-9d51-de4524f74edb",
+      "name": "Append row in sheet1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1dPljvkNshyqDw8Th_u10rSUlTRTGnPPYgFQk9ZcpTLI",
+          "mode": "list",
+          "cachedResultName": "Formación UDIA Clase 5 Bloque 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dPljvkNshyqDw8Th_u10rSUlTRTGnPPYgFQk9ZcpTLI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1dPljvkNshyqDw8Th_u10rSUlTRTGnPPYgFQk9ZcpTLI/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -672,
+        992
+      ],
+      "id": "7a82f0db-5b61-4510-9db1-8b76ea0cbb31",
+      "name": "Get row(s) in sheet"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -896,
+        992
+      ],
+      "id": "15fdccbb-8af0-46e0-af0f-ea813ec09871",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -448,
+        992
+      ],
+      "id": "bbdb8ec4-ccc2-4a97-b962-ec5b11232870",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8362ba20-b9a0-40ba-a9bc-110c1ed46146",
+              "name": "Nombre",
+              "value": "={{ $json.Nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "9c12b673-14fe-4ad2-8cd3-37c47277b4b8",
+              "name": "Correo",
+              "value": "={{ $json.Correo }}",
+              "type": "string"
+            },
+            {
+              "id": "19420d7a-cf5e-44a0-b4ca-9b9a59af126f",
+              "name": "Telefono",
+              "value": "={{ $json.Telefono }}",
+              "type": "number"
+            },
+            {
+              "id": "c926b8f2-1774-44b0-95ba-fa708ff2d1fe",
+              "name": "Edad",
+              "value": "={{ $json.Edad }}",
+              "type": "number"
+            },
+            {
+              "id": "fa727ff9-7dc7-4e6e-9382-20249b759c54",
+              "name": "Ciudad",
+              "value": "={{ $json.Ciudad }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        848
+      ],
+      "id": "42be9e00-afa5-4907-939c-1017259615bc",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6104560f-938a-4c31-aa5e-6118bb2542f3",
+              "name": "mensaje",
+              "value": "=Se ha registrado un cliente estos son sus datos: \nNombre {{ $json.Nombre }}\nCorreo: {{ $json.Correo }}\nTelefono: {{ $json.Telefono }}\nEdad: {{ $json.Edad }}\nCiudad{{ $json.Ciudad }}\n\nLe envío correo?",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        848
+      ],
+      "id": "90b660d9-8961-4bd5-9908-31ae182d4535",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "francescbb19@gmail.com",
+        "subject": "Nuevo registro",
+        "message": "={{ $json.mensaje }}",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        848
+      ],
+      "id": "b22d255a-e818-46ee-816d-8a0859827345",
+      "name": "Send a message2",
+      "webhookId": "89f35d19-8e40-4ada-be54-3b298cdc3468"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "95175eee-405c-4181-9d48-642236fdaf64",
+              "leftValue": "={{ $json.data.approved }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        912
+      ],
+      "id": "ec9945db-1a74-4f39-b5b6-a373ad54fd49",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Loop Over Items').item.json.Correo }}",
+        "subject": "Hola!",
+        "message": "=Hemos registrado tus datos  {{ $('Loop Over Items').item.json.Nombre }} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        912
+      ],
+      "id": "3492858d-8f95-4f9e-ba50-b2a099da826d",
+      "name": "Send a message3",
+      "webhookId": "fc3a35b1-60ef-4afd-b7b4-7a4625310875"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        896,
+        992
+      ],
+      "id": "1d991f47-1115-4391-aaaf-1c3f4037058d",
+      "name": "Wait1",
+      "webhookId": "bf8d8efe-10be-460e-85f7-472ef8659bbd"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-27T17:34:45.712Z",
+      "createdAt": "2026-04-27T17:34:45.712Z",
+      "role": "workflow:owner",
+      "workflowId": "HvsKUmVTX4bHZorf",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-27T17:35:03.535Z",
+  "versionId": "cf739fa4-9744-4bf3-be18-122ca4df7577"
+}
