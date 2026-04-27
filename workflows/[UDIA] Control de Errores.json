@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "If": {
       "main": [
@@ -33,6 +35,7 @@
   },
   "createdAt": "2025-04-10T18:23:37.941Z",
   "id": "g1mLyDE0pGclnmxh",
+  "isArchived": false,
   "meta": null,
   "name": "[UDIA] Control de Errores",
   "nodes": [
@@ -115,6 +118,15 @@
     "callerPolicy": "workflowsFromSameOwner",
     "errorWorkflow": "bYK6lr8uDfu5acRl"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-10T18:23:37.947Z",
+      "createdAt": "2025-04-10T18:23:37.947Z",
+      "role": "workflow:owner",
+      "workflowId": "g1mLyDE0pGclnmxh",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
