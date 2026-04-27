@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Google Drive Trigger": {
       "main": [
@@ -75,6 +77,7 @@
   },
   "createdAt": "2025-04-11T12:44:57.439Z",
   "id": "2n4Os2HvBCAfil0R",
+  "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -262,6 +265,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-11T12:44:57.449Z",
+      "createdAt": "2025-04-11T12:44:57.449Z",
+      "role": "workflow:owner",
+      "workflowId": "2n4Os2HvBCAfil0R",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
