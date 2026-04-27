@@ -1,5 +1,66 @@
 {
-  "active": false,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-04-02T18:55:53.205Z",
+    "createdAt": "2026-04-02T18:55:53.205Z",
+    "versionId": "ef583739-a61c-4216-aa95-0dde47451e3f",
+    "workflowId": "bYK6lr8uDfu5acRl",
+    "nodes": [
+      {
+        "parameters": {
+          "chatId": "8096562141",
+          "text": "=Error:  {{ $json.execution.error.message }}  \n\nÚltimo nodo ejecutado: {{ $json.execution.lastNodeExecuted }}",
+          "additionalFields": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          220,
+          0
+        ],
+        "id": "004888e1-a255-4a8b-9f17-a9f28bc6fddc",
+        "name": "Telegram",
+        "webhookId": "0f294089-1012-48ae-86b5-1b6e21bd2329",
+        "credentials": {
+          "telegramApi": {
+            "id": "3LRM6Aj1ndJe6IOw",
+            "name": "Telegram account"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.errorTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "4c7212dd-ef75-4ac9-82e8-55bdfce54f9c",
+        "name": "Error Trigger"
+      }
+    ],
+    "connections": {
+      "Error Trigger": {
+        "main": [
+          [
+            {
+              "node": "Telegram",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "ef583739-a61c-4216-aa95-0dde47451e3f",
   "connections": {
     "Error Trigger": {
       "main": [
@@ -15,6 +76,7 @@
   },
   "createdAt": "2025-04-10T18:23:17.200Z",
   "id": "bYK6lr8uDfu5acRl",
+  "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -62,6 +124,15 @@
     "callerPolicy": "workflowsFromSameOwner",
     "timezone": "Europe/Madrid"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-10T18:23:17.226Z",
+      "createdAt": "2025-04-10T18:23:17.226Z",
+      "role": "workflow:owner",
+      "workflowId": "bYK6lr8uDfu5acRl",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
