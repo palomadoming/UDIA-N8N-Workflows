@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When clicking ‘Test workflow’": {
       "main": [
@@ -26,6 +28,7 @@
   },
   "createdAt": "2025-04-09T15:49:03.875Z",
   "id": "wFRORHzMxzcTCAMZ",
+  "isArchived": false,
   "meta": null,
   "name": "HTTP request y SET",
   "nodes": [
@@ -116,6 +119,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-09T15:49:03.882Z",
+      "createdAt": "2025-04-09T15:49:03.882Z",
+      "role": "workflow:owner",
+      "workflowId": "wFRORHzMxzcTCAMZ",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
