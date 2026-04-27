@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "variables": {
       "main": [
@@ -93,6 +95,7 @@
   },
   "createdAt": "2025-04-16T08:29:17.111Z",
   "id": "mfy7OLjxkwkZFImD",
+  "isArchived": false,
   "meta": null,
   "name": "[UDIA] Nodos de extracción de datos con IA",
   "nodes": [
@@ -232,6 +235,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-16T08:29:17.125Z",
+      "createdAt": "2025-04-16T08:29:17.125Z",
+      "role": "workflow:owner",
+      "workflowId": "mfy7OLjxkwkZFImD",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
