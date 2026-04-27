@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-02T18:55:53.205Z",
-    "createdAt": "2026-04-02T18:55:53.205Z",
-    "versionId": "b5063657-0f2d-4ad2-bd0b-a23b79c92cc0",
+    "updatedAt": "2026-04-27T17:29:38.000Z",
+    "createdAt": "2026-04-27T17:25:09.083Z",
+    "versionId": "5cc788a7-67ec-424f-a15f-6accccd94b8d",
     "workflowId": "BAcxd8V1FtAnE6ju",
     "nodes": [
       {
@@ -12,8 +12,8 @@
         "name": "On clicking 'execute'",
         "type": "n8n-nodes-base.manualTrigger",
         "position": [
-          -1540,
-          220
+          -1536,
+          224
         ],
         "typeVersion": 1
       },
@@ -31,7 +31,7 @@
         "name": "GitHub",
         "type": "n8n-nodes-base.github",
         "position": [
-          -700,
+          -704,
           240
         ],
         "typeVersion": 1,
@@ -70,7 +70,7 @@
         "type": "n8n-nodes-base.switch",
         "position": [
           -160,
-          340
+          352
         ],
         "typeVersion": 1
       },
@@ -92,7 +92,7 @@
         "type": "n8n-nodes-base.noOp",
         "position": [
           0,
-          220
+          224
         ],
         "typeVersion": 1
       },
@@ -173,7 +173,7 @@
         "name": "Every 12 hours",
         "type": "n8n-nodes-base.cron",
         "position": [
-          -1540,
+          -1536,
           480
         ],
         "typeVersion": 1
@@ -187,14 +187,14 @@
         "name": "n8n",
         "type": "n8n-nodes-base.n8n",
         "position": [
-          -1160,
-          340
+          -1168,
+          352
         ],
         "typeVersion": 1,
         "credentials": {
           "n8nApi": {
-            "id": "s6cGpCfItQrUeM93",
-            "name": "n8n account 2"
+            "id": "iuz8k2ogVDF6j58p",
+            "name": "n8n recursivo"
           }
         }
       },
@@ -207,7 +207,7 @@
         "type": "n8n-nodes-base.code",
         "position": [
           -320,
-          340
+          352
         ],
         "typeVersion": 1
       },
@@ -217,8 +217,8 @@
         "name": "Merge",
         "type": "n8n-nodes-base.merge",
         "position": [
-          -460,
-          340
+          -464,
+          352
         ],
         "typeVersion": 2
       },
@@ -247,7 +247,7 @@
         "type": "n8n-nodes-base.set",
         "position": [
           -1360,
-          340
+          352
         ],
         "typeVersion": 1
       },
@@ -258,8 +258,8 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          -820,
-          120
+          -816,
+          128
         ]
       },
       {
@@ -272,7 +272,7 @@
         "typeVersion": 3,
         "position": [
           -960,
-          340
+          352
         ]
       }
     ],
@@ -458,12 +458,12 @@
         ]
       }
     },
-    "authors": "system migration",
-    "name": null,
-    "description": null,
-    "autosaved": false
+    "authors": "Paloma Dominguez",
+    "name": "Version 5cc788a7",
+    "description": "",
+    "autosaved": true
   },
-  "activeVersionId": "b5063657-0f2d-4ad2-bd0b-a23b79c92cc0",
+  "activeVersionId": "5cc788a7-67ec-424f-a15f-6accccd94b8d",
   "connections": {
     "On clicking 'execute'": {
       "main": [
