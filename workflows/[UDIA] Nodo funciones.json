@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When clicking ‘Test workflow’": {
       "main": [
@@ -31,6 +33,7 @@
   },
   "createdAt": "2025-04-10T17:59:57.170Z",
   "id": "xLEp047UAZ9Sli03",
+  "isArchived": false,
   "meta": null,
   "name": "[UDIA] Nodo funciones",
   "nodes": [
@@ -90,6 +93,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-10T17:59:57.180Z",
+      "createdAt": "2025-04-10T17:59:57.180Z",
+      "role": "workflow:owner",
+      "workflowId": "xLEp047UAZ9Sli03",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
