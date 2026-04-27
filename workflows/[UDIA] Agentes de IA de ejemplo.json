@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When chat message received": {
       "main": [
@@ -48,6 +50,7 @@
   },
   "createdAt": "2025-04-11T10:52:40.222Z",
   "id": "ATk0ksoOIXqQfxwE",
+  "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -131,6 +134,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-11T10:52:40.226Z",
+      "createdAt": "2025-04-11T10:52:40.226Z",
+      "role": "workflow:owner",
+      "workflowId": "ATk0ksoOIXqQfxwE",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
