@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When clicking ‘Test workflow’": {
       "main": [
@@ -25,6 +27,7 @@
   },
   "createdAt": "2025-04-10T17:31:13.613Z",
   "id": "f160m8JOcAl3DxkJ",
+  "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -98,6 +101,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-10T17:31:13.626Z",
+      "createdAt": "2025-04-10T17:31:13.626Z",
+      "role": "workflow:owner",
+      "workflowId": "f160m8JOcAl3DxkJ",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
