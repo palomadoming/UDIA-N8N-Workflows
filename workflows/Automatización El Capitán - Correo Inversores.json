@@ -1,0 +1,1994 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-04-20T19:27:14.000Z",
+    "createdAt": "2026-04-20T19:27:10.724Z",
+    "versionId": "bc19461a-a753-4843-9207-c23ec7e32763",
+    "workflowId": "NtvzITHJApK65tpr",
+    "nodes": [
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+            "mode": "list",
+            "cachedResultName": "Automatización El Capitán",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 1694960090,
+            "mode": "list",
+            "cachedResultName": "Hoja 2",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=1694960090"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1584,
+          -32
+        ],
+        "id": "40d2ea76-36d9-4409-8de0-c3db5652e0a9",
+        "name": "Get row(s) in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "j4ZnLe5mXGbvTJiJ",
+            "name": "Google Sheets account 5"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "3a164d12-1fd0-48cc-a1bc-f08b74c1ccbc",
+                "leftValue": "={{ \n  String($json[\"ENVIAR\"] || \"\").trim().toUpperCase() === \"SI\"\n  &&\n  [\"BORRADOR\", \"RECHAZADO\"].includes(\n    String($json[\"ESTADO\"] || \"\").trim().toUpperCase()\n  )\n}}",
+                "rightValue": "={{ true }}",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          48,
+          0
+        ],
+        "id": "646d918d-0170-4b97-946c-2cbb5ff84099",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "resource": "fileFolder",
+          "queryString": "={{$node[\"If\"].json[\"PDF\"]}}",
+          "returnAll": true,
+          "filter": {
+            "folderId": {
+              "__rl": true,
+              "value": "1dfaRAUyRXpT8xuseByJTZA3CJHLqQ36y",
+              "mode": "list",
+              "cachedResultName": "Automatización El Capitán",
+              "cachedResultUrl": "https://drive.google.com/drive/folders/1dfaRAUyRXpT8xuseByJTZA3CJHLqQ36y"
+            }
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          352,
+          -272
+        ],
+        "id": "7ef0b015-ab34-4df3-b52b-45f1710b48bd",
+        "name": "Search files and folders",
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "wiLRF9QPi18ANrOf",
+            "name": "Google Drive account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "download",
+          "fileId": {
+            "__rl": true,
+            "value": "={{$json[\"id\"]}}",
+            "mode": "id"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          544,
+          -272
+        ],
+        "id": "5db5b2a9-63c6-4f77-a215-b57d5b0d5244",
+        "name": "Download file",
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "wiLRF9QPi18ANrOf",
+            "name": "Google Drive account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "sendAndWait",
+          "fromEmail": " josemaza@economistas.org",
+          "toEmail": " josemaza@economistas.org",
+          "subject": "={{ $json[\"asunto\"] }}",
+          "message": "={{ $json[\"html\"] }}",
+          "approvalOptions": {
+            "values": {
+              "approvalType": "double",
+              "approveLabel": "Aprobar",
+              "disapproveLabel": "Rechazar"
+            }
+          },
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.emailSend",
+        "typeVersion": 2.1,
+        "position": [
+          1072,
+          32
+        ],
+        "id": "83685bee-d261-43f3-afd7-2c34276edc66",
+        "name": "Send an Email1",
+        "webhookId": "5862005e-dc67-4ad3-92d0-adb1b9da59b8",
+        "credentials": {
+          "smtp": {
+            "id": "CTuL2Z8yI9iMTpG7",
+            "name": "SMTP josedominguezmaza@gmail.com"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "const itemIf = $('If').first().json;\nconst itemDownload = $('Download file').first();\n\nconst asunto = itemIf[\"ASUNTO CORREO\"] || \"\";\nconst cuerpoRaw = String(itemIf[\"NUEVO CORREO\"] || \"\");\nconst pdf = itemIf[\"PDF\"] || \"\";\n\nconst normalizado = cuerpoRaw\n  .replace(/\\\\n/g, \"\\n\")\n  .replace(/\\r\\n/g, \"\\n\");\n\nconst parrafos = normalizado\n  .split(/\\n\\s*\\n/)\n  .map(p => p.trim())\n  .filter(Boolean);\n\nconst cuerpoHtml = parrafos\n  .map(p => `<p style=\"margin: 0 0 14px 0;\">${p.replace(/\\n/g, \"<br>\")}</p>`)\n  .join(\"\");\n\nconst html = `\n<div style=\"font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; text-align: left;\">\n  ${cuerpoHtml}\n  <p style=\"margin: 18px 0 0 0;\"><strong>Adjunto:</strong> ${pdf}</p>\n</div>\n`;\n\nreturn [\n  {\n    json: {\n      asunto,\n      html,\n      pdf\n    },\n    binary: itemDownload.binary\n  }\n];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          800,
+          -48
+        ],
+        "id": "d019eaa7-31a3-42b8-9921-4c976721e964",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineAll",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          2208,
+          1088
+        ],
+        "id": "f7ad5b52-8b23-4a8b-8655-7c9bfad01399",
+        "name": "Merge"
+      },
+      {
+        "parameters": {
+          "fromEmail": "José María Domínguez <josemaza@economistas.org>",
+          "toEmail": "={{ $json[\"CORREO\"] }}",
+          "subject": "={{ $json[\"asunto\"] }}",
+          "html": "={{ $json[\"html\"] + `\n<hr style=\"margin-top:20px;\">\n<p style=\"font-size:12px; color:#888; text-align:center;\">\nSi ya no deseas recibir estos correos, puedes darte de baja \n<a href=\"https://n8n-n8n.mdvbcf.easypanel.host/webhook/baja-suscripcion?token=${encodeURIComponent($json[\"TOKEN_BAJA\"])}\" style=\"color:#888;\">\naquí\n</a>.\n</p>\n` }}",
+          "options": {
+            "appendAttribution": false,
+            "attachments": "data"
+          }
+        },
+        "type": "n8n-nodes-base.emailSend",
+        "typeVersion": 2.1,
+        "position": [
+          2752,
+          1104
+        ],
+        "id": "e7b86fc7-c5a8-4d0c-8699-150cf028c1b6",
+        "name": "Send an Email2",
+        "webhookId": "23692f9f-7c93-4e00-965c-eec1bef4e5e6",
+        "credentials": {
+          "smtp": {
+            "id": "CTuL2Z8yI9iMTpG7",
+            "name": "SMTP josedominguezmaza@gmail.com"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "2d2442cc-34fb-4f63-8cea-93647090dda9",
+                "leftValue": "={{ $json[\"data\"][\"approved\"] }}",
+                "rightValue": "={{ $json.data.approved }}",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1312,
+          128
+        ],
+        "id": "5084d6e3-8d25-4825-8ab3-5a965d8a1204",
+        "name": "Aprobar / Rechazar"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "e3be2dc4-c5d5-4676-a9d3-873abb4e2454",
+                "leftValue": "={{ $json[\"ACTIVO\"] }}",
+                "rightValue": "SI",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1808,
+          -32
+        ],
+        "id": "140f4a07-d758-49d6-9e6f-00b687d71926",
+        "name": "ACTIVO = SI / NO"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+            "mode": "list",
+            "cachedResultName": "Automatización El Capitán",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "row_number": 2,
+              "ENVIAR": "NO",
+              "ASUNTO CORREO": "={{ \"\" }}",
+              "NUEVO CORREO": "={{ \"\" }}",
+              "PDF": "={{ \"\" }}",
+              "ESTADO": "BORRADOR"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "ASUNTO CORREO",
+                "displayName": "ASUNTO CORREO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "NUEVO CORREO",
+                "displayName": "NUEVO CORREO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "PDF",
+                "displayName": "PDF",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "ENVIAR",
+                "displayName": "ENVIAR",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "ESTADO",
+                "displayName": "ESTADO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1600,
+          128
+        ],
+        "id": "945e3376-31d2-4c51-9da3-35f6cf7f796a",
+        "name": "Update row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "j4ZnLe5mXGbvTJiJ",
+            "name": "Google Sheets account 5"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+            "mode": "list",
+            "cachedResultName": "Automatización El Capitán",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "ENVIAR": "NO",
+              "row_number": 2,
+              "ESTADO": "RECHAZADO"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "ASUNTO CORREO",
+                "displayName": "ASUNTO CORREO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "NUEVO CORREO",
+                "displayName": "NUEVO CORREO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "PDF",
+                "displayName": "PDF",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "ENVIAR",
+                "displayName": "ENVIAR",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "ESTADO",
+                "displayName": "ESTADO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1584,
+          336
+        ],
+        "id": "0ed17f46-3cf1-419a-aa3f-c9d7203e38f5",
+        "name": "Update row in sheet1",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "j4ZnLe5mXGbvTJiJ",
+            "name": "Google Sheets account 5"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+            "mode": "list",
+            "cachedResultName": "Automatización El Capitán",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "ESTADO": "PENDIENTE_APROBACION",
+              "row_number": 2
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "ASUNTO CORREO",
+                "displayName": "ASUNTO CORREO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "NUEVO CORREO",
+                "displayName": "NUEVO CORREO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "PDF",
+                "displayName": "PDF",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "ENVIAR",
+                "displayName": "ENVIAR",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "ESTADO",
+                "displayName": "ESTADO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1312,
+          -80
+        ],
+        "id": "6cc85166-b7c7-4109-bf02-368ffe870387",
+        "name": "Update row in sheet2",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "j4ZnLe5mXGbvTJiJ",
+            "name": "Google Sheets account 5"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "minutes",
+                "minutesInterval": 3
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -288,
+          0
+        ],
+        "id": "2b522799-88b9-463a-8913-b91ab2e11e1e",
+        "name": "Schedule Trigger"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+            "mode": "list",
+            "cachedResultName": "Automatización El Capitán",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -112,
+          0
+        ],
+        "id": "40073301-495d-496a-b1ea-9f0ca41dd0fe",
+        "name": "Get row(s) in sheet1",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "j4ZnLe5mXGbvTJiJ",
+            "name": "Google Sheets account 5"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "batchSize": 10,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          2208,
+          -336
+        ],
+        "id": "8462fc26-d7ce-4028-8b84-0e3ce50a892e",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {
+          "amount": 2
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          2656,
+          -320
+        ],
+        "id": "9caa288c-3296-4df0-a5f3-bdff3d0aee38",
+        "name": "Wait",
+        "webhookId": "caa67fc6-0d3f-47ff-9a5c-500851f01191"
+      },
+      {
+        "parameters": {
+          "jsCode": "const fijo = $(\"Code in JavaScript\").first();\n\nreturn $input.all()\n  .map(actual => {\n    const asunto = (fijo.json.asunto || \"\").trim();\n    let html = fijo.json.html || \"\";\n    const binary = fijo.binary || {};\n\n    const correo = String(actual.json.CORREO || \"\").trim();\n    const nombre = String(actual.json.NOMBRE || \"\").trim();\n    const token = String(actual.json.TOKEN_BAJA || \"\").trim();\n\n    // Validaciones (NO rompen el flujo)\n    if (!correo) {\n      console.log(`❌ Correo vacío: ${JSON.stringify(actual.json)}`);\n      return null;\n    }\n\n    if (!correo.includes(\"@\")) {\n      console.log(`❌ Email inválido: ${correo}`);\n      return null;\n    }\n\n    if (/\\s/.test(correo)) {\n      console.log(`❌ Múltiples emails o espacios: ${correo}`);\n      return null;\n    }\n\n    const linkBaja = `https://n8n-n8n.mdvbcf.easypanel.host/webhook/baja-suscripcion?token=${encodeURIComponent(token)}`;\n\n    const htmlFinal = html + `\n<hr style=\"margin-top:20px;\">\n<p style=\"font-size:12px; color:#888; text-align:center;\">\nSi ya no deseas recibir estos correos, puedes darte de baja \n<a href=\"${linkBaja}\" style=\"color:#888;\">aquí</a>.\n</p>\n`;\n\n    return {\n      json: {\n        to: correo,\n        subject: asunto,\n        html: htmlFinal,\n        nombre,\n        token_baja: token,\n      },\n      binary,\n    };\n  })\n  .filter(item => item !== null);"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2464,
+          -320
+        ],
+        "id": "d5efa7b8-0db7-4d3f-9758-8e24253b29c4",
+        "name": "Code in JavaScript1"
+      },
+      {
+        "parameters": {
+          "fromEmail": "José María Domínguez <josemaza@economistas.org>",
+          "toEmail": "={{ $json[\"to\"] }}",
+          "subject": "={{ $json[\"subject\"] }}",
+          "html": "={{ $json[\"html\"] }}",
+          "options": {
+            "appendAttribution": false,
+            "attachments": "data"
+          }
+        },
+        "type": "n8n-nodes-base.emailSend",
+        "typeVersion": 2.1,
+        "position": [
+          2816,
+          -544
+        ],
+        "id": "2d97bae1-547d-4fdd-8483-ceed1184abe6",
+        "name": "Send an Email",
+        "webhookId": "23692f9f-7c93-4e00-965c-eec1bef4e5e6",
+        "credentials": {
+          "smtp": {
+            "id": "CTuL2Z8yI9iMTpG7",
+            "name": "SMTP josedominguezmaza@gmail.com"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "const fijo = $(\"Code in JavaScript\").first();\n\n// Procesar todos los items del lote actual\nreturn $input.all().map(actual => {\n  const asunto = fijo.json.asunto || \"\";\n  let html = fijo.json.html || \"\";\n  const binary = fijo.binary || {};\n\n  const correo = actual.json.CORREO || \"\";\n  const nombre = actual.json.NOMBRE || \"\";\n  const token = actual.json.TOKEN_BAJA || \"\";\n\n  if (!correo) {\n    throw new Error(`Falta CORREO en el item actual: ${JSON.stringify(actual.json)}`);\n  }\n\n  const linkBaja = `https://n8n-n8n.mdvbcf.easypanel.host/webhook/baja-suscripcion?token=${encodeURIComponent(token)}`;\n\n  const htmlFinal = html + `\n<hr style=\"margin-top:20px;\">\n<p style=\"font-size:12px; color:#888; text-align:center;\">\nSi ya no deseas recibir estos correos, puedes darte de baja \n<a href=\"${linkBaja}\" style=\"color:#888;\">aquí</a>.\n</p>\n`;\n\n  return {\n    json: {\n      to: correo,\n      subject: asunto,\n      html: htmlFinal,\n      nombre,\n      token_baja: token,\n    },\n    binary,\n  };\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2464,
+          1088
+        ],
+        "id": "6f262ef2-5bf3-4d70-831d-d37089eb0eca",
+        "name": "Code in JavaScript2"
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json[\"to\"] }}",
+          "subject": "={{ $json[\"subject\"] }}",
+          "message": "={{ $json[\"html\"] }}",
+          "options": {
+            "appendAttribution": false,
+            "attachmentsUi": {
+              "attachmentsBinary": [
+                {}
+              ]
+            }
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          2864,
+          -320
+        ],
+        "id": "9b778230-e78a-4b0d-9728-85f7803a7aa6",
+        "name": "Send a message",
+        "webhookId": "fa2fb2fb-2e25-4fdb-8ac7-04e00c418d0a",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "FMH8qzf3sZj4Ao97",
+            "name": "Gmail josedominguezmaza"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Search files and folders",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Search files and folders": {
+        "main": [
+          [
+            {
+              "node": "Download file",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet": {
+        "main": [
+          [
+            {
+              "node": "ACTIVO = SI / NO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Download file": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send an Email1": {
+        "main": [
+          [
+            {
+              "node": "Aprobar / Rechazar",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Update row in sheet2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "Send an Email1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          []
+        ]
+      },
+      "Aprobar / Rechazar": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Update row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Update row in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ACTIVO = SI / NO": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send an Email2": {
+        "main": [
+          []
+        ]
+      },
+      "Update row in sheet1": {
+        "main": [
+          []
+        ]
+      },
+      "Update row in sheet2": {
+        "main": [
+          []
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet1": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Code in JavaScript1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript1": {
+        "main": [
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send an Email": {
+        "main": [
+          []
+        ]
+      },
+      "Send a message": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Paloma Dominguez",
+    "name": "Version bc19461a",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "bc19461a-a753-4843-9207-c23ec7e32763",
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "ACTIVO = SI / NO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email1": {
+      "main": [
+        [
+          {
+            "node": "Aprobar / Rechazar",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send an Email1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        []
+      ]
+    },
+    "Aprobar / Rechazar": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ACTIVO = SI / NO": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email2": {
+      "main": [
+        []
+      ]
+    },
+    "Update row in sheet1": {
+      "main": [
+        []
+      ]
+    },
+    "Update row in sheet2": {
+      "main": [
+        []
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email": {
+      "main": [
+        []
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-03T11:25:56.963Z",
+  "id": "NtvzITHJApK65tpr",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Automatización El Capitán - Correo Inversores",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+          "mode": "list",
+          "cachedResultName": "Automatización El Capitán",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1694960090,
+          "mode": "list",
+          "cachedResultName": "Hoja 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=1694960090"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1584,
+        -32
+      ],
+      "id": "40d2ea76-36d9-4409-8de0-c3db5652e0a9",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "j4ZnLe5mXGbvTJiJ",
+          "name": "Google Sheets account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3a164d12-1fd0-48cc-a1bc-f08b74c1ccbc",
+              "leftValue": "={{ \n  String($json[\"ENVIAR\"] || \"\").trim().toUpperCase() === \"SI\"\n  &&\n  [\"BORRADOR\", \"RECHAZADO\"].includes(\n    String($json[\"ESTADO\"] || \"\").trim().toUpperCase()\n  )\n}}",
+              "rightValue": "={{ true }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        48,
+        0
+      ],
+      "id": "646d918d-0170-4b97-946c-2cbb5ff84099",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{$node[\"If\"].json[\"PDF\"]}}",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1dfaRAUyRXpT8xuseByJTZA3CJHLqQ36y",
+            "mode": "list",
+            "cachedResultName": "Automatización El Capitán",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1dfaRAUyRXpT8xuseByJTZA3CJHLqQ36y"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        352,
+        -272
+      ],
+      "id": "7ef0b015-ab34-4df3-b52b-45f1710b48bd",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wiLRF9QPi18ANrOf",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{$json[\"id\"]}}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        544,
+        -272
+      ],
+      "id": "5db5b2a9-63c6-4f77-a215-b57d5b0d5244",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wiLRF9QPi18ANrOf",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "fromEmail": " josemaza@economistas.org",
+        "toEmail": " josemaza@economistas.org",
+        "subject": "={{ $json[\"asunto\"] }}",
+        "message": "={{ $json[\"html\"] }}",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double",
+            "approveLabel": "Aprobar",
+            "disapproveLabel": "Rechazar"
+          }
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1072,
+        32
+      ],
+      "id": "83685bee-d261-43f3-afd7-2c34276edc66",
+      "name": "Send an Email1",
+      "webhookId": "5862005e-dc67-4ad3-92d0-adb1b9da59b8",
+      "credentials": {
+        "smtp": {
+          "id": "CTuL2Z8yI9iMTpG7",
+          "name": "SMTP josedominguezmaza@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const itemIf = $('If').first().json;\nconst itemDownload = $('Download file').first();\n\nconst asunto = itemIf[\"ASUNTO CORREO\"] || \"\";\nconst cuerpoRaw = String(itemIf[\"NUEVO CORREO\"] || \"\");\nconst pdf = itemIf[\"PDF\"] || \"\";\n\nconst normalizado = cuerpoRaw\n  .replace(/\\\\n/g, \"\\n\")\n  .replace(/\\r\\n/g, \"\\n\");\n\nconst parrafos = normalizado\n  .split(/\\n\\s*\\n/)\n  .map(p => p.trim())\n  .filter(Boolean);\n\nconst cuerpoHtml = parrafos\n  .map(p => `<p style=\"margin: 0 0 14px 0;\">${p.replace(/\\n/g, \"<br>\")}</p>`)\n  .join(\"\");\n\nconst html = `\n<div style=\"font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; text-align: left;\">\n  ${cuerpoHtml}\n  <p style=\"margin: 18px 0 0 0;\"><strong>Adjunto:</strong> ${pdf}</p>\n</div>\n`;\n\nreturn [\n  {\n    json: {\n      asunto,\n      html,\n      pdf\n    },\n    binary: itemDownload.binary\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        -48
+      ],
+      "id": "d019eaa7-31a3-42b8-9921-4c976721e964",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2208,
+        1088
+      ],
+      "id": "f7ad5b52-8b23-4a8b-8655-7c9bfad01399",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "fromEmail": "José María Domínguez <josemaza@economistas.org>",
+        "toEmail": "={{ $json[\"CORREO\"] }}",
+        "subject": "={{ $json[\"asunto\"] }}",
+        "html": "={{ $json[\"html\"] + `\n<hr style=\"margin-top:20px;\">\n<p style=\"font-size:12px; color:#888; text-align:center;\">\nSi ya no deseas recibir estos correos, puedes darte de baja \n<a href=\"https://n8n-n8n.mdvbcf.easypanel.host/webhook/baja-suscripcion?token=${encodeURIComponent($json[\"TOKEN_BAJA\"])}\" style=\"color:#888;\">\naquí\n</a>.\n</p>\n` }}",
+        "options": {
+          "appendAttribution": false,
+          "attachments": "data"
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2752,
+        1104
+      ],
+      "id": "e7b86fc7-c5a8-4d0c-8699-150cf028c1b6",
+      "name": "Send an Email2",
+      "webhookId": "23692f9f-7c93-4e00-965c-eec1bef4e5e6",
+      "credentials": {
+        "smtp": {
+          "id": "CTuL2Z8yI9iMTpG7",
+          "name": "SMTP josedominguezmaza@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2d2442cc-34fb-4f63-8cea-93647090dda9",
+              "leftValue": "={{ $json[\"data\"][\"approved\"] }}",
+              "rightValue": "={{ $json.data.approved }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1312,
+        128
+      ],
+      "id": "5084d6e3-8d25-4825-8ab3-5a965d8a1204",
+      "name": "Aprobar / Rechazar"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e3be2dc4-c5d5-4676-a9d3-873abb4e2454",
+              "leftValue": "={{ $json[\"ACTIVO\"] }}",
+              "rightValue": "SI",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1808,
+        -32
+      ],
+      "id": "140f4a07-d758-49d6-9e6f-00b687d71926",
+      "name": "ACTIVO = SI / NO"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+          "mode": "list",
+          "cachedResultName": "Automatización El Capitán",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": 2,
+            "ENVIAR": "NO",
+            "ASUNTO CORREO": "={{ \"\" }}",
+            "NUEVO CORREO": "={{ \"\" }}",
+            "PDF": "={{ \"\" }}",
+            "ESTADO": "BORRADOR"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ASUNTO CORREO",
+              "displayName": "ASUNTO CORREO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "NUEVO CORREO",
+              "displayName": "NUEVO CORREO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PDF",
+              "displayName": "PDF",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ENVIAR",
+              "displayName": "ENVIAR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ESTADO",
+              "displayName": "ESTADO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1600,
+        128
+      ],
+      "id": "945e3376-31d2-4c51-9da3-35f6cf7f796a",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "j4ZnLe5mXGbvTJiJ",
+          "name": "Google Sheets account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+          "mode": "list",
+          "cachedResultName": "Automatización El Capitán",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ENVIAR": "NO",
+            "row_number": 2,
+            "ESTADO": "RECHAZADO"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ASUNTO CORREO",
+              "displayName": "ASUNTO CORREO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "NUEVO CORREO",
+              "displayName": "NUEVO CORREO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PDF",
+              "displayName": "PDF",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ENVIAR",
+              "displayName": "ENVIAR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ESTADO",
+              "displayName": "ESTADO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1584,
+        336
+      ],
+      "id": "0ed17f46-3cf1-419a-aa3f-c9d7203e38f5",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "j4ZnLe5mXGbvTJiJ",
+          "name": "Google Sheets account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+          "mode": "list",
+          "cachedResultName": "Automatización El Capitán",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ESTADO": "PENDIENTE_APROBACION",
+            "row_number": 2
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ASUNTO CORREO",
+              "displayName": "ASUNTO CORREO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "NUEVO CORREO",
+              "displayName": "NUEVO CORREO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PDF",
+              "displayName": "PDF",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ENVIAR",
+              "displayName": "ENVIAR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ESTADO",
+              "displayName": "ESTADO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1312,
+        -80
+      ],
+      "id": "6cc85166-b7c7-4109-bf02-368ffe870387",
+      "name": "Update row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "j4ZnLe5mXGbvTJiJ",
+          "name": "Google Sheets account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 3
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -288,
+        0
+      ],
+      "id": "2b522799-88b9-463a-8913-b91ab2e11e1e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+          "mode": "list",
+          "cachedResultName": "Automatización El Capitán",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "40073301-495d-496a-b1ea-9f0ca41dd0fe",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "j4ZnLe5mXGbvTJiJ",
+          "name": "Google Sheets account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2208,
+        -336
+      ],
+      "id": "8462fc26-d7ce-4028-8b84-0e3ce50a892e",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2656,
+        -320
+      ],
+      "id": "9caa288c-3296-4df0-a5f3-bdff3d0aee38",
+      "name": "Wait",
+      "webhookId": "caa67fc6-0d3f-47ff-9a5c-500851f01191"
+    },
+    {
+      "parameters": {
+        "jsCode": "const fijo = $(\"Code in JavaScript\").first();\n\nreturn $input.all()\n  .map(actual => {\n    const asunto = (fijo.json.asunto || \"\").trim();\n    let html = fijo.json.html || \"\";\n    const binary = fijo.binary || {};\n\n    const correo = String(actual.json.CORREO || \"\").trim();\n    const nombre = String(actual.json.NOMBRE || \"\").trim();\n    const token = String(actual.json.TOKEN_BAJA || \"\").trim();\n\n    // Validaciones (NO rompen el flujo)\n    if (!correo) {\n      console.log(`❌ Correo vacío: ${JSON.stringify(actual.json)}`);\n      return null;\n    }\n\n    if (!correo.includes(\"@\")) {\n      console.log(`❌ Email inválido: ${correo}`);\n      return null;\n    }\n\n    if (/\\s/.test(correo)) {\n      console.log(`❌ Múltiples emails o espacios: ${correo}`);\n      return null;\n    }\n\n    const linkBaja = `https://n8n-n8n.mdvbcf.easypanel.host/webhook/baja-suscripcion?token=${encodeURIComponent(token)}`;\n\n    const htmlFinal = html + `\n<hr style=\"margin-top:20px;\">\n<p style=\"font-size:12px; color:#888; text-align:center;\">\nSi ya no deseas recibir estos correos, puedes darte de baja \n<a href=\"${linkBaja}\" style=\"color:#888;\">aquí</a>.\n</p>\n`;\n\n    return {\n      json: {\n        to: correo,\n        subject: asunto,\n        html: htmlFinal,\n        nombre,\n        token_baja: token,\n      },\n      binary,\n    };\n  })\n  .filter(item => item !== null);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2464,
+        -320
+      ],
+      "id": "d5efa7b8-0db7-4d3f-9758-8e24253b29c4",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "fromEmail": "José María Domínguez <josemaza@economistas.org>",
+        "toEmail": "={{ $json[\"to\"] }}",
+        "subject": "={{ $json[\"subject\"] }}",
+        "html": "={{ $json[\"html\"] }}",
+        "options": {
+          "appendAttribution": false,
+          "attachments": "data"
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2816,
+        -544
+      ],
+      "id": "2d97bae1-547d-4fdd-8483-ceed1184abe6",
+      "name": "Send an Email",
+      "webhookId": "23692f9f-7c93-4e00-965c-eec1bef4e5e6",
+      "credentials": {
+        "smtp": {
+          "id": "CTuL2Z8yI9iMTpG7",
+          "name": "SMTP josedominguezmaza@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const fijo = $(\"Code in JavaScript\").first();\n\n// Procesar todos los items del lote actual\nreturn $input.all().map(actual => {\n  const asunto = fijo.json.asunto || \"\";\n  let html = fijo.json.html || \"\";\n  const binary = fijo.binary || {};\n\n  const correo = actual.json.CORREO || \"\";\n  const nombre = actual.json.NOMBRE || \"\";\n  const token = actual.json.TOKEN_BAJA || \"\";\n\n  if (!correo) {\n    throw new Error(`Falta CORREO en el item actual: ${JSON.stringify(actual.json)}`);\n  }\n\n  const linkBaja = `https://n8n-n8n.mdvbcf.easypanel.host/webhook/baja-suscripcion?token=${encodeURIComponent(token)}`;\n\n  const htmlFinal = html + `\n<hr style=\"margin-top:20px;\">\n<p style=\"font-size:12px; color:#888; text-align:center;\">\nSi ya no deseas recibir estos correos, puedes darte de baja \n<a href=\"${linkBaja}\" style=\"color:#888;\">aquí</a>.\n</p>\n`;\n\n  return {\n    json: {\n      to: correo,\n      subject: asunto,\n      html: htmlFinal,\n      nombre,\n      token_baja: token,\n    },\n    binary,\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2464,
+        1088
+      ],
+      "id": "6f262ef2-5bf3-4d70-831d-d37089eb0eca",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json[\"to\"] }}",
+        "subject": "={{ $json[\"subject\"] }}",
+        "message": "={{ $json[\"html\"] }}",
+        "options": {
+          "appendAttribution": false,
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2864,
+        -320
+      ],
+      "id": "9b778230-e78a-4b0d-9728-85f7803a7aa6",
+      "name": "Send a message",
+      "webhookId": "fa2fb2fb-2e25-4fdb-8ac7-04e00c418d0a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FMH8qzf3sZj4Ao97",
+          "name": "Gmail josedominguezmaza"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-03T11:25:56.985Z",
+      "createdAt": "2026-04-03T11:25:56.985Z",
+      "role": "workflow:owner",
+      "workflowId": "NtvzITHJApK65tpr",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
+  "staticData": {
+    "node:Google Sheets Trigger": {
+      "documentId": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+      "sheetId": 0,
+      "lastRevision": 308,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0&revision=308&exportFormat=xlsx"
+    },
+    "node:Google Sheets Trigger1": {
+      "documentId": "1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0",
+      "sheetId": 0,
+      "lastRevision": 263,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0&revision=263&exportFormat=xlsx"
+    },
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-04-20T19:27:10.718Z",
+  "versionId": "bc19461a-a753-4843-9207-c23ec7e32763"
+}
