@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Workflow Input Trigger": {
       "main": [
@@ -42,6 +44,7 @@
   },
   "createdAt": "2025-04-16T08:45:33.553Z",
   "id": "oi6qqYfkd4rVleyt",
+  "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -203,6 +206,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-16T08:45:33.560Z",
+      "createdAt": "2025-04-16T08:45:33.560Z",
+      "role": "workflow:owner",
+      "workflowId": "oi6qqYfkd4rVleyt",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
