@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "On form submission": {
       "main": [
@@ -15,6 +17,7 @@
   },
   "createdAt": "2025-04-08T12:42:06.957Z",
   "id": "rOUpBLSpDUmWN81j",
+  "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -130,11 +133,20 @@
     "timezone": "Europe/Madrid",
     "callerPolicy": "workflowsFromSameOwner"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-08T12:42:06.970Z",
+      "createdAt": "2025-04-08T12:42:06.970Z",
+      "role": "workflow:owner",
+      "workflowId": "rOUpBLSpDUmWN81j",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2025-04-08T12:43:31.643Z",
       "updatedAt": "2025-04-08T12:43:31.643Z",
+      "createdAt": "2025-04-08T12:43:31.643Z",
       "id": "EXQmzli0NTchfCGh",
       "name": "❤️Udia 🧠Experimento"
     }
