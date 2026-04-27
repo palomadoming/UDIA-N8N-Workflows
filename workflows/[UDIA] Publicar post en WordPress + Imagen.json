@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When clicking ‘Test workflow’": {
       "main": [
@@ -37,6 +39,7 @@
   },
   "createdAt": "2025-04-14T15:40:34.423Z",
   "id": "YUPpreUTBCRyyoAS",
+  "isArchived": false,
   "meta": null,
   "name": "[UDIA] Publicar post en WordPress + Imagen",
   "nodes": [
@@ -95,6 +98,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-04-14T15:40:34.429Z",
+      "createdAt": "2025-04-14T15:40:34.429Z",
+      "role": "workflow:owner",
+      "workflowId": "YUPpreUTBCRyyoAS",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
