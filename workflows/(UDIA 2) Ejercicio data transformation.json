@@ -1,0 +1,318 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-27T17:33:19.449Z",
+  "id": "a74flEQIkMqXxizA",
+  "isArchived": false,
+  "meta": null,
+  "name": "(UDIA 2) Ejercicio data transformation",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Ejercicio 1 Data Tranformation",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nombre"
+            },
+            {
+              "fieldLabel": "Apellidos"
+            },
+            {
+              "fieldLabel": "Teléfono"
+            },
+            {
+              "fieldLabel": "Correo"
+            },
+            {
+              "fieldLabel": "Trabajo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a10a27cc-9dd6-4da6-82b3-6d52d364ed04",
+      "name": "On form submission",
+      "webhookId": "57294cf6-1ac4-4c1a-bc8f-a13c9faf04f8"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "46b3d49f-6198-45d0-aa77-67af83d00c98",
+              "name": "Nombre",
+              "value": "={{ $json.Nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "8c687001-ec64-4d99-ae9a-d9a3ec92a3dd",
+              "name": "Apellidos",
+              "value": "={{ $json.Apellidos }}",
+              "type": "string"
+            },
+            {
+              "id": "d490d01a-383c-48ae-86da-139387ded7e6",
+              "name": "Teléfono",
+              "value": "={{ $json[\"Teléfono\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "4ab96bb8-3d88-4547-b0b8-975d48fbf4df",
+              "name": "Correo",
+              "value": "={{ $json.Correo }}",
+              "type": "string"
+            },
+            {
+              "id": "1be8e16f-a1bc-410d-a870-fac5b7c0e2c1",
+              "name": "Ciudad",
+              "value": "Alicante",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "938f26ed-c3fe-4eba-8ef0-0153f2e41182",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7667fcf0-9134-40e5-ac0a-a8b6cdb7ad9d",
+              "name": "Trabajo",
+              "value": "={{ $json.Trabajo }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        208
+      ],
+      "id": "6f2765c3-36ba-4160-be2c-caf71b5a05eb",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        480,
+        32
+      ],
+      "id": "35a7cc22-78d7-4d30-ab6d-0fd10b6ebd2a",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "543fd2cf-26e9-4d07-b519-a05259ccafe7",
+              "name": "Mensaje",
+              "value": "=El cliente se llama {{ $json.Nombre }} {{ $json.Apellidos }}, su teléfono es {{ $json[\"Teléfono\"] }} y su correo {{ $json.Correo }}. Vive en {{ $json.Ciudad }} y trabaja como {{ $json.Trabajo }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        896,
+        32
+      ],
+      "id": "d789b25b-05ed-4c6a-9056-e1ee4bc1f563",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "Nombre"
+            },
+            {
+              "fieldToAggregate": "Apellidos"
+            },
+            {
+              "fieldToAggregate": "Teléfono"
+            },
+            {
+              "fieldToAggregate": "Correo"
+            },
+            {
+              "fieldToAggregate": "Ciudad"
+            },
+            {
+              "fieldToAggregate": "Trabajo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        688,
+        32
+      ],
+      "id": "4ca96f5b-3012-4191-9fd4-4917bd7a88db",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtenemos todos los ítems que llegan al nodo\nconst allItems = $input.all();\n\n// Fusionamos todos los objetos internos en uno solo\nconst mergedData = allItems.reduce((acc, item) => {\n  return { ...acc, ...item.json };\n}, {});\n\n// Devolvemos el resultado envuelto en la estructura que n8n espera\nreturn { json: mergedData };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        192
+      ],
+      "id": "b0968cd5-6de1-4f99-8f4a-eeac23fd9e49",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "543fd2cf-26e9-4d07-b519-a05259ccafe7",
+              "name": "Mensaje",
+              "value": "=El cliente se llama {{ $json.Nombre }} {{ $json.Apellidos }}, su teléfono es {{ $json[\"Teléfono\"] }} y su correo {{ $json.Correo }}. Vive en {{ $json.Ciudad }} y trabaja como {{ $json.Trabajo }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1040,
+        176
+      ],
+      "id": "78cae02d-40f9-4ec7-a1a5-78adc48a3daa",
+      "name": "Edit Fields3"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-27T17:33:19.455Z",
+      "createdAt": "2026-04-27T17:33:19.455Z",
+      "role": "workflow:owner",
+      "workflowId": "a74flEQIkMqXxizA",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-27T17:33:54.941Z",
+  "versionId": "f4ab7cc1-c85f-40c9-86c3-0dd4e96c1a67"
+}
