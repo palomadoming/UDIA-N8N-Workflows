@@ -1,0 +1,311 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-04-02T18:55:53.205Z",
+    "createdAt": "2026-04-02T18:55:53.205Z",
+    "versionId": "6dbe12d5-b321-475b-a51b-d6646c1ac7aa",
+    "workflowId": "uMEUdZ74rhPop3rr",
+    "nodes": [
+      {
+        "parameters": {
+          "list": "a9f60d4085",
+          "events": [
+            "unsubscribe"
+          ],
+          "sources": [
+            "user",
+            "admin",
+            "api"
+          ]
+        },
+        "type": "n8n-nodes-base.mailchimpTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "183f72d6-7a5a-4dfa-a39f-020829072e03",
+        "name": "Mailchimp Trigger",
+        "webhookId": "d8d74650-a7e5-4fe8-9f43-216f69f61bd2",
+        "credentials": {
+          "mailchimpApi": {
+            "id": "QOyBhAMQZqGWfvws",
+            "name": "Mailchimp account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI",
+            "mode": "list",
+            "cachedResultName": "Suscripción NEWSLETTER MUNSURI",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit#gid=0"
+          },
+          "filtersUI": {
+            "values": [
+              {
+                "lookupColumn": "CORREO",
+                "lookupValue": "={{ $json['data[email]'] }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.6,
+        "position": [
+          208,
+          0
+        ],
+        "id": "a8ee7422-50fa-4c46-b0e9-ffa466f85d85",
+        "name": "Get row(s) in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "jqdFOpgmVpndnStL",
+            "name": "Google Sheets account 4"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "delete",
+          "documentId": {
+            "__rl": true,
+            "value": "1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI",
+            "mode": "list",
+            "cachedResultName": "Suscripción NEWSLETTER MUNSURI",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit#gid=0"
+          },
+          "startIndex": "={{ $json.row_number }}"
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.6,
+        "position": [
+          416,
+          0
+        ],
+        "id": "5a751f00-1df0-420d-84a3-3416254fc2f8",
+        "name": "Delete rows or columns from sheet",
+        "executeOnce": true,
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "jqdFOpgmVpndnStL",
+            "name": "Google Sheets account 4"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Mailchimp Trigger": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet": {
+        "main": [
+          [
+            {
+              "node": "Delete rows or columns from sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "6dbe12d5-b321-475b-a51b-d6646c1ac7aa",
+  "connections": {
+    "Mailchimp Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Delete rows or columns from sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-25T17:47:15.847Z",
+  "id": "uMEUdZ74rhPop3rr",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Actualización Bajas NEWSLETTER MUNSURI",
+  "nodes": [
+    {
+      "parameters": {
+        "list": "a9f60d4085",
+        "events": [
+          "unsubscribe"
+        ],
+        "sources": [
+          "user",
+          "admin",
+          "api"
+        ]
+      },
+      "type": "n8n-nodes-base.mailchimpTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "183f72d6-7a5a-4dfa-a39f-020829072e03",
+      "name": "Mailchimp Trigger",
+      "webhookId": "d8d74650-a7e5-4fe8-9f43-216f69f61bd2",
+      "credentials": {
+        "mailchimpApi": {
+          "id": "QOyBhAMQZqGWfvws",
+          "name": "Mailchimp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI",
+          "mode": "list",
+          "cachedResultName": "Suscripción NEWSLETTER MUNSURI",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "CORREO",
+              "lookupValue": "={{ $json['data[email]'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a8ee7422-50fa-4c46-b0e9-ffa466f85d85",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jqdFOpgmVpndnStL",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "documentId": {
+          "__rl": true,
+          "value": "1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI",
+          "mode": "list",
+          "cachedResultName": "Suscripción NEWSLETTER MUNSURI",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit#gid=0"
+        },
+        "startIndex": "={{ $json.row_number }}"
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        416,
+        0
+      ],
+      "id": "5a751f00-1df0-420d-84a3-3416254fc2f8",
+      "name": "Delete rows or columns from sheet",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jqdFOpgmVpndnStL",
+          "name": "Google Sheets account 4"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-07-25T17:47:15.855Z",
+      "createdAt": "2025-07-25T17:47:15.855Z",
+      "role": "workflow:owner",
+      "workflowId": "uMEUdZ74rhPop3rr",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
+  "staticData": {
+    "node:Mailchimp Trigger": {
+      "webhookId": "5a45250041",
+      "events": [
+        "unsubscribe"
+      ],
+      "sources": [
+        "user",
+        "admin",
+        "api"
+      ]
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-11T10:58:19.000Z",
+  "versionId": "6dbe12d5-b321-475b-a51b-d6646c1ac7aa"
+}
