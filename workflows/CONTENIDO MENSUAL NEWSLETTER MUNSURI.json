@@ -1,0 +1,1578 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-04-02T18:55:53.205Z",
+    "createdAt": "2026-04-02T18:55:53.205Z",
+    "versionId": "9fcfd443-9af9-4f10-bf6d-72e41254de32",
+    "workflowId": "kCnWqiZ987WxWczp",
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "months",
+                "triggerAtDayOfMonth": 22,
+                "triggerAtHour": 11
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          -304,
+          -672
+        ],
+        "id": "536457eb-ab49-4463-81ad-4b2332a934e4",
+        "name": "Schedule Trigger"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1 ➜ Cargar datos de ambos nodos Google Sheets\nconst datosMeses = $items(\"Get row(s) in sheet\").map(i => i.json);   // Hoja 1\nconst productos  = $items(\"Get row(s) in sheet1\").map(i => i.json);  // Hoja 2\n\n// 2 ➜ Mes actual (o forzado para pruebas)\nconst forzarMes = \"\";  // pon \"\" para mes real\nconst fecha     = new Date();\nconst nombreMes = forzarMes || fecha.toLocaleString(\"es-ES\", { month: \"long\" });\nconst mesActual = nombreMes.charAt(0).toUpperCase() + nombreMes.slice(1);\n\n// 3 ➜ Buscar planificación\nconst entradaMes = datosMeses.find(r =>\n  (r.MESES || \"\").toLowerCase() === mesActual.toLowerCase()\n);\nconst seccionPrincipal = entradaMes?.CONTENIDO || \"Mujer y Teen\";\nconst mesEspecial      = entradaMes?.[\"MES ESPECIAL\"] || \"\";\n\n// 4 ➜ Propagar sección hacia abajo (col_1 vacía)\nlet ultimaSeccion = \"\";\nfor (const fila of productos) {\n  if (fila.col_1 && fila.col_1.trim() !== \"\") {\n    ultimaSeccion = fila.col_1.trim();\n  } else {\n    fila.col_1 = ultimaSeccion;\n  }\n}\n\n// 5 ➜ Crear lista de secciones: primero la del mes, luego otras\nconst seccionesOrdenadas = [\n  seccionPrincipal,\n  ...datosMeses\n    .map(r => r.CONTENIDO)\n    .filter(s => s && s !== seccionPrincipal)\n];\n\n// 6 ➜ Buscar una fila libre en esas secciones\nlet fila = null;\nlet seccionElegida = \"\";\nfor (const seccion of seccionesOrdenadas) {\n  const candidatos = productos\n    .filter(r => (r.col_1 || \"\").toLowerCase() === seccion.toLowerCase())\n    .filter(r => (r.USADO || \"\").toUpperCase() !== \"SI\");\n\n  if (candidatos.length > 0) {\n    fila = candidatos[Math.floor(Math.random() * candidatos.length)];\n    seccionElegida = seccion;\n    break;\n  }\n}\n\n// 7 ➜ Si no hay productos libres\nif (!fila) {\n  return [{\n    json: { error: `No hay productos sin usar en ninguna sección.` }\n  }];\n}\n\n// 8 ➜ Construir selección de productos\nconst CATS = [\n  \"BIKINI\",\"TRIKINI\",\"BAÑADOR\",\"CULETÍN\",\n  \"BÓXER\",\"COMPLEMENTOS\",\"CONJUNTOS\"\n];\nconst productosSeleccionados = {};\nfor (const cat of CATS) {\n  if (fila[cat]) productosSeleccionados[cat] = fila[cat];\n}\n\n// 9 ➜ Salida\nreturn [{\n  json: {\n    mes       : mesActual,\n    seccion   : seccionElegida,\n    especial  : mesEspecial,\n    productos : productosSeleccionados,\n    row_number: fila.row_number,\n    USADO     : \"SI\"\n  }\n}];\n\n\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          448,
+          -64
+        ],
+        "id": "44880717-a487-4afa-a5bb-69ebfbcf9610",
+        "name": "Code"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g",
+            "mode": "list",
+            "cachedResultName": "INFOR CONTENIDO NEWSLETTER",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.6,
+        "position": [
+          64,
+          -64
+        ],
+        "id": "2eb2f61a-aded-4096-8e31-652e3f8857e4",
+        "name": "Get row(s) in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "jqdFOpgmVpndnStL",
+            "name": "Google Sheets account 4"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g",
+            "mode": "list",
+            "cachedResultName": "INFOR CONTENIDO NEWSLETTER",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 1331854111,
+            "mode": "list",
+            "cachedResultName": "Hoja 2",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit#gid=1331854111"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.6,
+        "position": [
+          272,
+          -64
+        ],
+        "id": "22d82c7a-a955-4aaf-828b-7a7f2f067c54",
+        "name": "Get row(s) in sheet1",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "jqdFOpgmVpndnStL",
+            "name": "Google Sheets account 4"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g",
+            "mode": "list",
+            "cachedResultName": "INFOR CONTENIDO NEWSLETTER",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 1331854111,
+            "mode": "list",
+            "cachedResultName": "Hoja 2",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit#gid=1331854111"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "row_number": "={{$json.row_number}}",
+              "USADO": "={{$json.USADO}}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "BIKINI",
+                "displayName": "BIKINI",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "TRIKINI",
+                "displayName": "TRIKINI",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "BAÑADOR",
+                "displayName": "BAÑADOR",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CULETÍN",
+                "displayName": "CULETÍN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "BÓXER",
+                "displayName": "BÓXER",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "COMPLEMENTOS",
+                "displayName": "COMPLEMENTOS",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CONJUNTOS",
+                "displayName": "CONJUNTOS",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "USADO",
+                "displayName": "USADO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {
+            "locationDefine": {
+              "values": {
+                "headerRow": 4,
+                "firstDataRow": 5
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.6,
+        "position": [
+          688,
+          -576
+        ],
+        "id": "8e9e0b1e-ad33-481f-bda0-083f5cbf39c0",
+        "name": "Update row in sheet",
+        "alwaysOutputData": true,
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "jqdFOpgmVpndnStL",
+            "name": "Google Sheets account 4"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "value": "gpt-4o-mini",
+            "mode": "list",
+            "cachedResultName": "GPT-4O-MINI"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "=Eres un redactor creativo de newsletters para una tienda de bañadores llamada Munsuri. Tu objetivo es escribir el contenido mensual de la newsletter.\n\nEste mes es: {{ $json[\"mes\"] }}  \nLa sección de productos destacada es: {{ $json[\"seccion\"] }}  \n¿Es un mes especial? {{ $json[\"especial\"] }}  \nLos productos seleccionados para destacar son:\n\n{{ Object.entries($json[\"productos\"]).map(([tipo, nombre]) => `${tipo}: ${nombre}`).join('\\n') }}\n\nIncluye un asunto atractivo y llamativo relacionado con los productos que se van a destacar y la estación del año. \n\nEn el contenido de la Newsletter, redacta un texto atractivo, breve (menos de 200 palabras), con tono fresco y emocional, invitando a visitar la tienda online y destacando el producto. Incluye una frase con gancho al final.\n\nDevuelve el resultado únicamente en formato JSON válido con dos claves: \"asunto\" y \"contenido\".\nNo añadas explicaciones, ni texto fuera del objeto JSON, ni bloques de código.\n\nEjemplo de salida:\n{\n  \"asunto\": \"Este Julio brilla con Munsuri: nuevos bañadores para niña\",\n  \"contenido\": \"Aquí va el texto completo de la newsletter...\"\n}\n\nAñade de forma natural una invitación a visitar la tienda online: https://www.munsuri.com/\n\n"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.openAi",
+        "typeVersion": 1.8,
+        "position": [
+          992,
+          -272
+        ],
+        "id": "853a7ab3-9fca-4288-a8aa-f5a42a70a357",
+        "name": "Message a model",
+        "alwaysOutputData": true,
+        "credentials": {
+          "openAiApi": {
+            "id": "rdJzH5xVW8BGATek",
+            "name": "OpenAi account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "const productos = $json[\"productos\"];\nconst seccion = $json[\"seccion\"];\nconst resultados = [];\n\nfor (const tipo in productos) {\n  const nombreProducto = productos[tipo];\n  const nombreBusqueda = `${seccion.toUpperCase()} - ${nombreProducto}`;\n  resultados.push({\n    tipo,\n    nombreProducto,\n    nombreBusqueda\n  });\n}\n\nreturn resultados;\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          992,
+          384
+        ],
+        "id": "f0c9e98d-daee-4112-b92b-6488ae119d5f",
+        "name": "Code1"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          1184,
+          384
+        ],
+        "id": "61064c5e-ecb2-4f6e-95b4-6a8b7cee2ad9",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -144,
+          -320
+        ],
+        "id": "ecc32760-a843-4d30-9494-57ae09177cb1",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          1568,
+          -128
+        ],
+        "id": "52863b7e-8032-4ed4-98d0-e02d3088f5f8",
+        "name": "Merge"
+      },
+      {
+        "parameters": {
+          "resource": "fileFolder",
+          "searchMethod": "query",
+          "queryString": "=name contains '{{ $json[\"nombreBusqueda\"] }}'",
+          "returnAll": true,
+          "filter": {
+            "folderId": {
+              "__rl": true,
+              "value": "1brxq4cS9Uu9V_m1BIN2z6nNz4MORvm_A",
+              "mode": "list",
+              "cachedResultName": "CONTENIDO NEWSLETTER MUNSURI",
+              "cachedResultUrl": "https://drive.google.com/drive/folders/1brxq4cS9Uu9V_m1BIN2z6nNz4MORvm_A"
+            }
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          1392,
+          400
+        ],
+        "id": "330d0881-b1a5-4181-9ec4-520166ef9606",
+        "name": "Search files and folders",
+        "executeOnce": false,
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "wiLRF9QPi18ANrOf",
+            "name": "Google Drive account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "const itemsOut = [];\nlet asunto = \"\";\nlet texto = \"\";\nconst imagenes = [];\n\n// Extraer texto generado por el modelo y convertirlo en JSON válido\nfor (const item of items) {\n  if (item.json.message?.content) {\n    try {\n      const respuesta = JSON.parse(item.json.message.content);\n      asunto = respuesta.asunto || \"Newsletter Munsuri\";\n      texto = respuesta.contenido || \"\";\n    } catch (e) {\n      // En caso de que no sea un JSON válido, usa como texto directamente\n      asunto = \"Newsletter Munsuri\";\n      texto = item.json.message.content || \"\";\n    }\n  } else if (item.json.id) {\n    const id = item.json.id;\n    const url = `https://drive.google.com/uc?export=view&id=${id}`;\n    imagenes.push(url);\n  }\n}\n\n// Asegurar que texto sea un string\ntexto = String(texto || \"\");\n\n// Construir el HTML final\nconst imagenesHtml = imagenes.map(url => \n  `<img src=\"${url}\" width=\"300\" style=\"margin: 10px 10px 20px 0; border-radius: 8px;\" />`\n).join(\"\\n\");\n\nconst html = `\n  <div style=\"font-family: Arial, sans-serif; line-height: 1.5;\">\n    <p>${texto.replace(/\\n/g, \"<br>\")}</p>\n    <p style=\"font-size: 10px; color: #777; margin-top: 30px;\">\n      Si ya no deseas recibir nuestra newsletter, puedes \n      <a href=\"https://munsuri.us16.list-manage.com/unsubscribe?u=5b89f35aa7397f201273afe99&id=a9f60d4085\" target=\"_blank\" style=\"color: #777;\">\n        cancelar tu suscripción aquí\n      </a>.\n    </p>\n    <hr style=\"margin: 20px 0;\">\n    ${imagenesHtml}\n  </div>\n`;\n\nitemsOut.push({ json: { asunto, html } });\nreturn itemsOut;\n\n\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1776,
+          -128
+        ],
+        "id": "67c58051-c56b-4ace-8a2a-6bfe543b19d4",
+        "name": "Code4"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "loose",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "b5b2e7b3-2653-4bb6-b66b-167712db241d",
+                "leftValue": "={{ $json[\"data\"][\"approved\"] }}",
+                "rightValue": "true",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "looseTypeValidation": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          2192,
+          -128
+        ],
+        "id": "386bc253-3142-485e-b335-ea7edc5a12c9",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI",
+            "mode": "list",
+            "cachedResultName": "Suscripción NEWSLETTER MUNSURI",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.6,
+        "position": [
+          2400,
+          -224
+        ],
+        "id": "2a8ef18d-bbb9-4c76-bcd7-a61e4f1b5725",
+        "name": "Get row(s) in sheet2",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "jqdFOpgmVpndnStL",
+            "name": "Google Sheets account 4"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "const emails = $input.all().map(item => item.json.CORREO);\nreturn [{ json: { correos: emails.join(\", \") } }];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2608,
+          -224
+        ],
+        "id": "6b3bfe7f-8e7d-4237-b90a-fe29eb9232bb",
+        "name": "Code6"
+      },
+      {
+        "parameters": {
+          "jsCode": "return [\n  {\n    json: {\n      mes: $node[\"Code\"].json[\"mes\"],\n      seccion: $node[\"Code\"].json[\"seccion\"],\n      especial: $node[\"Code\"].json[\"especial\"],\n      productos: $node[\"Code\"].json[\"productos\"]\n    }\n  }\n];\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          768,
+          -64
+        ],
+        "id": "bfc8d749-bc09-41fd-a612-42e2f3ff3701",
+        "name": "Code2"
+      },
+      {
+        "parameters": {
+          "operation": "sendAndWait",
+          "fromEmail": "munsuri.munsuri@gmail.com",
+          "toEmail": "munsuri.munsuri@gmail.com",
+          "subject": "={{ $json[\"asunto\"] }}",
+          "message": "={{ $json[\"html\"] }}",
+          "approvalOptions": {
+            "values": {
+              "approvalType": "double",
+              "approveLabel": "Aprobar",
+              "disapproveLabel": "Rechazar"
+            }
+          },
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.emailSend",
+        "typeVersion": 2.1,
+        "position": [
+          1984,
+          -128
+        ],
+        "id": "37beff5e-78e1-4983-9d81-84282bc9d49a",
+        "name": "SendAndWait email",
+        "webhookId": "69664248-d3ee-4b06-b5c9-f320ebab8949",
+        "credentials": {
+          "smtp": {
+            "id": "k8JkZYeS3fvkdQpP",
+            "name": "SMTP account Munsuri"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "fromEmail": "munsuri.munsuri@gmail.com",
+          "toEmail": "=",
+          "subject": "={{ $items(\"Code4\")[0].json.asunto }}",
+          "html": "={{ $items(\"Code4\")[0].json.html }}",
+          "options": {
+            "appendAttribution": false,
+            "bccEmail": "={{ $json.correos }}"
+          }
+        },
+        "type": "n8n-nodes-base.emailSend",
+        "typeVersion": 2.1,
+        "position": [
+          2816,
+          -224
+        ],
+        "id": "e3702604-3bd2-4fd5-9ea1-286c43871341",
+        "name": "Send email",
+        "webhookId": "f6db6289-a0e2-4485-852f-1dec650d8efa",
+        "credentials": {
+          "smtp": {
+            "id": "k8JkZYeS3fvkdQpP",
+            "name": "SMTP account Munsuri"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "months",
+                "triggerAtDayOfMonth": 15,
+                "triggerAtHour": 10,
+                "triggerAtMinute": null
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          -144,
+          -64
+        ],
+        "id": "28c39279-4a89-4e6a-98f0-b906b48cfae2",
+        "name": "Schedule Trigger1"
+      }
+    ],
+    "connections": {
+      "Schedule Trigger": {
+        "main": [
+          []
+        ]
+      },
+      "Get row(s) in sheet": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet1": {
+        "main": [
+          [
+            {
+              "node": "Code",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Code1",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Message a model",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row in sheet": {
+        "main": [
+          []
+        ]
+      },
+      "Code1": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ],
+          [
+            {
+              "node": "Search files and folders",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          []
+        ]
+      },
+      "Message a model": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "Code4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Search files and folders": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code4": {
+        "main": [
+          [
+            {
+              "node": "SendAndWait email",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Code2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet2": {
+        "main": [
+          [
+            {
+              "node": "Code6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code6": {
+        "main": [
+          [
+            {
+              "node": "Send email",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code2": {
+        "main": [
+          [
+            {
+              "node": "Message a model",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Code1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "SendAndWait email": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger1": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "9fcfd443-9af9-4f10-bf6d-72e41254de32",
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        []
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        []
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code4": {
+      "main": [
+        [
+          {
+            "node": "SendAndWait email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Code6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code6": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SendAndWait email": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-25T20:58:24.908Z",
+  "id": "kCnWqiZ987WxWczp",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "CONTENIDO MENSUAL NEWSLETTER MUNSURI",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "triggerAtDayOfMonth": 22,
+              "triggerAtHour": 11
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -304,
+        -672
+      ],
+      "id": "536457eb-ab49-4463-81ad-4b2332a934e4",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1 ➜ Cargar datos de ambos nodos Google Sheets\nconst datosMeses = $items(\"Get row(s) in sheet\").map(i => i.json);   // Hoja 1\nconst productos  = $items(\"Get row(s) in sheet1\").map(i => i.json);  // Hoja 2\n\n// 2 ➜ Mes actual (o forzado para pruebas)\nconst forzarMes = \"\";  // pon \"\" para mes real\nconst fecha     = new Date();\nconst nombreMes = forzarMes || fecha.toLocaleString(\"es-ES\", { month: \"long\" });\nconst mesActual = nombreMes.charAt(0).toUpperCase() + nombreMes.slice(1);\n\n// 3 ➜ Buscar planificación\nconst entradaMes = datosMeses.find(r =>\n  (r.MESES || \"\").toLowerCase() === mesActual.toLowerCase()\n);\nconst seccionPrincipal = entradaMes?.CONTENIDO || \"Mujer y Teen\";\nconst mesEspecial      = entradaMes?.[\"MES ESPECIAL\"] || \"\";\n\n// 4 ➜ Propagar sección hacia abajo (col_1 vacía)\nlet ultimaSeccion = \"\";\nfor (const fila of productos) {\n  if (fila.col_1 && fila.col_1.trim() !== \"\") {\n    ultimaSeccion = fila.col_1.trim();\n  } else {\n    fila.col_1 = ultimaSeccion;\n  }\n}\n\n// 5 ➜ Crear lista de secciones: primero la del mes, luego otras\nconst seccionesOrdenadas = [\n  seccionPrincipal,\n  ...datosMeses\n    .map(r => r.CONTENIDO)\n    .filter(s => s && s !== seccionPrincipal)\n];\n\n// 6 ➜ Buscar una fila libre en esas secciones\nlet fila = null;\nlet seccionElegida = \"\";\nfor (const seccion of seccionesOrdenadas) {\n  const candidatos = productos\n    .filter(r => (r.col_1 || \"\").toLowerCase() === seccion.toLowerCase())\n    .filter(r => (r.USADO || \"\").toUpperCase() !== \"SI\");\n\n  if (candidatos.length > 0) {\n    fila = candidatos[Math.floor(Math.random() * candidatos.length)];\n    seccionElegida = seccion;\n    break;\n  }\n}\n\n// 7 ➜ Si no hay productos libres\nif (!fila) {\n  return [{\n    json: { error: `No hay productos sin usar en ninguna sección.` }\n  }];\n}\n\n// 8 ➜ Construir selección de productos\nconst CATS = [\n  \"BIKINI\",\"TRIKINI\",\"BAÑADOR\",\"CULETÍN\",\n  \"BÓXER\",\"COMPLEMENTOS\",\"CONJUNTOS\"\n];\nconst productosSeleccionados = {};\nfor (const cat of CATS) {\n  if (fila[cat]) productosSeleccionados[cat] = fila[cat];\n}\n\n// 9 ➜ Salida\nreturn [{\n  json: {\n    mes       : mesActual,\n    seccion   : seccionElegida,\n    especial  : mesEspecial,\n    productos : productosSeleccionados,\n    row_number: fila.row_number,\n    USADO     : \"SI\"\n  }\n}];\n\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        -64
+      ],
+      "id": "44880717-a487-4afa-a5bb-69ebfbcf9610",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g",
+          "mode": "list",
+          "cachedResultName": "INFOR CONTENIDO NEWSLETTER",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        64,
+        -64
+      ],
+      "id": "2eb2f61a-aded-4096-8e31-652e3f8857e4",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jqdFOpgmVpndnStL",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g",
+          "mode": "list",
+          "cachedResultName": "INFOR CONTENIDO NEWSLETTER",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1331854111,
+          "mode": "list",
+          "cachedResultName": "Hoja 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit#gid=1331854111"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        272,
+        -64
+      ],
+      "id": "22d82c7a-a955-4aaf-828b-7a7f2f067c54",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jqdFOpgmVpndnStL",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g",
+          "mode": "list",
+          "cachedResultName": "INFOR CONTENIDO NEWSLETTER",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1331854111,
+          "mode": "list",
+          "cachedResultName": "Hoja 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gdeWl4cjznMnuJXkizLb5tuz8uR7w2zOphVqEgT_S-g/edit#gid=1331854111"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{$json.row_number}}",
+            "USADO": "={{$json.USADO}}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "BIKINI",
+              "displayName": "BIKINI",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TRIKINI",
+              "displayName": "TRIKINI",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "BAÑADOR",
+              "displayName": "BAÑADOR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CULETÍN",
+              "displayName": "CULETÍN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "BÓXER",
+              "displayName": "BÓXER",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "COMPLEMENTOS",
+              "displayName": "COMPLEMENTOS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CONJUNTOS",
+              "displayName": "CONJUNTOS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "USADO",
+              "displayName": "USADO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "locationDefine": {
+            "values": {
+              "headerRow": 4,
+              "firstDataRow": 5
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        688,
+        -576
+      ],
+      "id": "8e9e0b1e-ad33-481f-bda0-083f5cbf39c0",
+      "name": "Update row in sheet",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jqdFOpgmVpndnStL",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Eres un redactor creativo de newsletters para una tienda de bañadores llamada Munsuri. Tu objetivo es escribir el contenido mensual de la newsletter.\n\nEste mes es: {{ $json[\"mes\"] }}  \nLa sección de productos destacada es: {{ $json[\"seccion\"] }}  \n¿Es un mes especial? {{ $json[\"especial\"] }}  \nLos productos seleccionados para destacar son:\n\n{{ Object.entries($json[\"productos\"]).map(([tipo, nombre]) => `${tipo}: ${nombre}`).join('\\n') }}\n\nIncluye un asunto atractivo y llamativo relacionado con los productos que se van a destacar y la estación del año. \n\nEn el contenido de la Newsletter, redacta un texto atractivo, breve (menos de 200 palabras), con tono fresco y emocional, invitando a visitar la tienda online y destacando el producto. Incluye una frase con gancho al final.\n\nDevuelve el resultado únicamente en formato JSON válido con dos claves: \"asunto\" y \"contenido\".\nNo añadas explicaciones, ni texto fuera del objeto JSON, ni bloques de código.\n\nEjemplo de salida:\n{\n  \"asunto\": \"Este Julio brilla con Munsuri: nuevos bañadores para niña\",\n  \"contenido\": \"Aquí va el texto completo de la newsletter...\"\n}\n\nAñade de forma natural una invitación a visitar la tienda online: https://www.munsuri.com/\n\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        992,
+        -272
+      ],
+      "id": "853a7ab3-9fca-4288-a8aa-f5a42a70a357",
+      "name": "Message a model",
+      "alwaysOutputData": true,
+      "credentials": {
+        "openAiApi": {
+          "id": "rdJzH5xVW8BGATek",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const productos = $json[\"productos\"];\nconst seccion = $json[\"seccion\"];\nconst resultados = [];\n\nfor (const tipo in productos) {\n  const nombreProducto = productos[tipo];\n  const nombreBusqueda = `${seccion.toUpperCase()} - ${nombreProducto}`;\n  resultados.push({\n    tipo,\n    nombreProducto,\n    nombreBusqueda\n  });\n}\n\nreturn resultados;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        992,
+        384
+      ],
+      "id": "f0c9e98d-daee-4112-b92b-6488ae119d5f",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1184,
+        384
+      ],
+      "id": "61064c5e-ecb2-4f6e-95b4-6a8b7cee2ad9",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        -320
+      ],
+      "id": "ecc32760-a843-4d30-9494-57ae09177cb1",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1568,
+        -128
+      ],
+      "id": "52863b7e-8032-4ed4-98d0-e02d3088f5f8",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "searchMethod": "query",
+        "queryString": "=name contains '{{ $json[\"nombreBusqueda\"] }}'",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1brxq4cS9Uu9V_m1BIN2z6nNz4MORvm_A",
+            "mode": "list",
+            "cachedResultName": "CONTENIDO NEWSLETTER MUNSURI",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1brxq4cS9Uu9V_m1BIN2z6nNz4MORvm_A"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1392,
+        400
+      ],
+      "id": "330d0881-b1a5-4181-9ec4-520166ef9606",
+      "name": "Search files and folders",
+      "executeOnce": false,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wiLRF9QPi18ANrOf",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const itemsOut = [];\nlet asunto = \"\";\nlet texto = \"\";\nconst imagenes = [];\n\n// Extraer texto generado por el modelo y convertirlo en JSON válido\nfor (const item of items) {\n  if (item.json.message?.content) {\n    try {\n      const respuesta = JSON.parse(item.json.message.content);\n      asunto = respuesta.asunto || \"Newsletter Munsuri\";\n      texto = respuesta.contenido || \"\";\n    } catch (e) {\n      // En caso de que no sea un JSON válido, usa como texto directamente\n      asunto = \"Newsletter Munsuri\";\n      texto = item.json.message.content || \"\";\n    }\n  } else if (item.json.id) {\n    const id = item.json.id;\n    const url = `https://drive.google.com/uc?export=view&id=${id}`;\n    imagenes.push(url);\n  }\n}\n\n// Asegurar que texto sea un string\ntexto = String(texto || \"\");\n\n// Construir el HTML final\nconst imagenesHtml = imagenes.map(url => \n  `<img src=\"${url}\" width=\"300\" style=\"margin: 10px 10px 20px 0; border-radius: 8px;\" />`\n).join(\"\\n\");\n\nconst html = `\n  <div style=\"font-family: Arial, sans-serif; line-height: 1.5;\">\n    <p>${texto.replace(/\\n/g, \"<br>\")}</p>\n    <p style=\"font-size: 10px; color: #777; margin-top: 30px;\">\n      Si ya no deseas recibir nuestra newsletter, puedes \n      <a href=\"https://munsuri.us16.list-manage.com/unsubscribe?u=5b89f35aa7397f201273afe99&id=a9f60d4085\" target=\"_blank\" style=\"color: #777;\">\n        cancelar tu suscripción aquí\n      </a>.\n    </p>\n    <hr style=\"margin: 20px 0;\">\n    ${imagenesHtml}\n  </div>\n`;\n\nitemsOut.push({ json: { asunto, html } });\nreturn itemsOut;\n\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1776,
+        -128
+      ],
+      "id": "67c58051-c56b-4ace-8a2a-6bfe543b19d4",
+      "name": "Code4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b5b2e7b3-2653-4bb6-b66b-167712db241d",
+              "leftValue": "={{ $json[\"data\"][\"approved\"] }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2192,
+        -128
+      ],
+      "id": "386bc253-3142-485e-b335-ea7edc5a12c9",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI",
+          "mode": "list",
+          "cachedResultName": "Suscripción NEWSLETTER MUNSURI",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DuvPfDjS_4hsXtCO5naYZsv4fpD91emppd_JKnzZxHI/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2400,
+        -224
+      ],
+      "id": "2a8ef18d-bbb9-4c76-bcd7-a61e4f1b5725",
+      "name": "Get row(s) in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "jqdFOpgmVpndnStL",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const emails = $input.all().map(item => item.json.CORREO);\nreturn [{ json: { correos: emails.join(\", \") } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2608,
+        -224
+      ],
+      "id": "6b3bfe7f-8e7d-4237-b90a-fe29eb9232bb",
+      "name": "Code6"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      mes: $node[\"Code\"].json[\"mes\"],\n      seccion: $node[\"Code\"].json[\"seccion\"],\n      especial: $node[\"Code\"].json[\"especial\"],\n      productos: $node[\"Code\"].json[\"productos\"]\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        768,
+        -64
+      ],
+      "id": "bfc8d749-bc09-41fd-a612-42e2f3ff3701",
+      "name": "Code2"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "fromEmail": "munsuri.munsuri@gmail.com",
+        "toEmail": "munsuri.munsuri@gmail.com",
+        "subject": "={{ $json[\"asunto\"] }}",
+        "message": "={{ $json[\"html\"] }}",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double",
+            "approveLabel": "Aprobar",
+            "disapproveLabel": "Rechazar"
+          }
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1984,
+        -128
+      ],
+      "id": "37beff5e-78e1-4983-9d81-84282bc9d49a",
+      "name": "SendAndWait email",
+      "webhookId": "69664248-d3ee-4b06-b5c9-f320ebab8949",
+      "credentials": {
+        "smtp": {
+          "id": "k8JkZYeS3fvkdQpP",
+          "name": "SMTP account Munsuri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "munsuri.munsuri@gmail.com",
+        "toEmail": "=",
+        "subject": "={{ $items(\"Code4\")[0].json.asunto }}",
+        "html": "={{ $items(\"Code4\")[0].json.html }}",
+        "options": {
+          "appendAttribution": false,
+          "bccEmail": "={{ $json.correos }}"
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2816,
+        -224
+      ],
+      "id": "e3702604-3bd2-4fd5-9ea1-286c43871341",
+      "name": "Send email",
+      "webhookId": "f6db6289-a0e2-4485-852f-1dec650d8efa",
+      "credentials": {
+        "smtp": {
+          "id": "k8JkZYeS3fvkdQpP",
+          "name": "SMTP account Munsuri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "triggerAtDayOfMonth": 15,
+              "triggerAtHour": 10,
+              "triggerAtMinute": null
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -144,
+        -64
+      ],
+      "id": "28c39279-4a89-4e6a-98f0-b906b48cfae2",
+      "name": "Schedule Trigger1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-07-25T20:58:24.916Z",
+      "createdAt": "2025-07-25T20:58:24.916Z",
+      "role": "workflow:owner",
+      "workflowId": "kCnWqiZ987WxWczp",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    },
+    "node:Schedule Trigger1": {
+      "recurrenceRules": [
+        280
+      ]
+    }
+  },
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-11-22T17:46:43.000Z",
+  "versionId": "9fcfd443-9af9-4f10-bf6d-72e41254de32"
+}
