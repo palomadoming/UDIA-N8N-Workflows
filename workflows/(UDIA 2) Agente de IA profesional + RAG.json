@@ -1,0 +1,956 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Redis7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Redis8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Redis11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Get a file1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Redis6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe a recording1": {
+      "main": [
+        [
+          {
+            "node": "Redis9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis6": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis7": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis8": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis9": {
+      "main": [
+        [
+          {
+            "node": "Wait4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait4": {
+      "main": [
+        [
+          {
+            "node": "Redis10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis10": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis11": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Transcribe a recording1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Texto": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Audio": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-29T17:57:52.282Z",
+  "id": "06MDe5CM1THdbuVj",
+  "isArchived": false,
+  "meta": null,
+  "name": "(UDIA 2) Agente de IA profesional + RAG",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        640,
+        64
+      ],
+      "id": "be3bf5f9-31e8-4558-9a8a-733813feaa84",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1EDOAl6wB49v81mS1hPPajQpoF-pceI5l",
+          "mode": "list",
+          "cachedResultName": "derecho-civil-i-derecho-de-la-persona-3ed_compress.pdf",
+          "cachedResultUrl": "https://drive.google.com/file/d/1EDOAl6wB49v81mS1hPPajQpoF-pceI5l/view?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        848,
+        64
+      ],
+      "id": "c7a7349e-bb86-445d-89d2-50c50516d8be",
+      "name": "Download file"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        1056,
+        64
+      ],
+      "id": "1b83c845-157e-4651-90bf-640bbf3167c7",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "jsCode": "const texto = items[0].json.text;\nconst chunkSize = 500;\nconst overlap = 50;\nconst palabras = texto.split(' ');\nconst chunks = [];\n\nfor (let i = 0; i < palabras.length; i += chunkSize - overlap) {\n  const chunk = palabras.slice(i, i + chunkSize).join(' ');\n  if (chunk.trim()) {\n    chunks.push({\n      json: {\n        contenido: chunk,\n        metadata: { pagina_aprox: Math.floor(i / chunkSize) + 1 }\n      }\n    });\n  }\n}\n\nreturn chunks;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1264,
+        64
+      ],
+      "id": "d453e8ce-e9f4-485c-8759-105e73d45d19",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        1616,
+        64
+      ],
+      "id": "506d375c-4bda-4d7d-9318-39259022f3a0",
+      "name": "Supabase Vector Store"
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-ada-002",
+        "options": {
+          "batchSize": 50
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1456,
+        256
+      ],
+      "id": "4b9824a0-e9b7-43fd-86e8-23766b010941",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Mensaje_Audio_Cliente : {{ $json.message }}\nMensaje_Texto_Cliente: {{ $json.message }}\n\nMensaje_Audio_Cliente : {{ $json.message }}\nMensaje_Texto_Cliente: {{ $json.message }}\n\nEl usuario te ha enviado el siguiente mensaje: {{ $json.message }}\nInicia la conversación saludando cordialmente al candidato y continúa con su duda sobre Derecho Mercantil.\n\nPor qué funciona así:\n\nAl ser User Message, el modelo lo trata como si fuera el candidato quien habla primero, lo que fuerza al agente a responder siempre.\n{{ $json.message }} inyecta el contenido real (texto o transcripción del audio según lo que hayas definido antes).\nEl saludo inicial está garantizado porque el agente siempre responde a un mensaje de usuario, a diferencia del System Message que solo define comportamiento.\n\nSi quieres que el saludo sea aún más consistente, puedes forzarlo más explícitamente:\n\nEl usuario te ha enviado el siguiente mensaje: {{ $json.message }}\nAntes de procesar el contenido del mensaje, saluda cordialmente al usuario mencionando que eres un asistente de dudas sobre Derecho Mercantil.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=ROL Y CONTEXTO\nEres LexCivil, un asistente especializado en Derecho Civil. Tienes acceso a una herramienta de búsqueda semántica conectada a una base de datos vectorial alojada en Supabase Vector Store, que contiene el contenido completo de un manual de Derecho Civil.\n\nAntes de responder cualquier consulta, SIEMPRE debes invocar esta herramienta para recuperar los fragmentos más relevantes del manual y fundamentar tus respuestas en ellos.\n\nInteractúas con los usuarios a través de Telegram, por lo que debes adaptar tu formato al entorno: mensajes claros, bien estructurados, usando Markdown compatible con Telegram (negrita, cursiva, código) y dividiendo respuestas largas en partes si es necesario.\n\nTU REGLA DE ORO:\nTienes PROHIBIDO usar tu conocimiento pre-entrenado o información externa para responder. Debes responder ÚNICAMENTE usando la información recuperada por la herramienta 'manual_derecho_civil'.\n\nInstrucciones de Respuesta:\n\nSi la información necesaria para responder NO está en los fragmentos recuperados del manual, tu respuesta debe ser textualmente: 'Lo siento, esa información no aparece explícitamente en el manual de referencia.'\n\nNo intentes adivinar, no inventes artículos ni leyes, y no completes información faltante con tu conocimiento general.\n\nCita siempre la fuente basándote en el contexto recuperado (ej: 'Según el texto...').\n\nSi te preguntan 'hola' o saludos, responde brevemente y pide que hagan una consulta sobre el manual.\n\nHERRAMIENTA DISPONIBLE\n\"Supabase Vector Store\"\n\nDescripción: Realiza una búsqueda semántica en la base de datos vectorial de Supabase que contiene el manual de Derecho Civil. Devuelve los fragmentos (chunks) del manual más relevantes para la consulta del usuario.\nCuándo usarla: SIEMPRE antes de formular cualquier respuesta relacionada con Derecho Civil. Es tu fuente de conocimiento principal y prioritaria.\nInput: Una query en lenguaje natural que describa el concepto, tema o pregunta que necesitas buscar.\nOutput: Uno o varios fragmentos de texto del manual con su contenido y, si está disponible, su referencia (capítulo, sección o página).\nInstrucciones de uso:\nReformula la pregunta del usuario como una query de búsqueda concisa y semánticamente rica antes de lanzarla.\nSi la primera búsqueda no devuelve resultados suficientes, reformula la query con sinónimos o términos más generales y busca de nuevo.\nUsa los fragmentos recuperados como base de tu respuesta. Cítalos o parafraseálos, nunca los ignores.\nSi tras dos búsquedas no encuentras información relevante en el manual, indícaselo al usuario y responde con tu conocimiento general, dejando claro que la información no proviene del manual.\nCAPACIDADES\nPuedes ayudar al usuario con los siguientes tipos de solicitudes:\n\nDefinición de conceptos: Explica términos y figuras jurídico-civiles de forma clara y precisa, citando siempre la fuente dentro del manual.\nResolución de ejercicios: Analiza supuestos prácticos paso a paso, identificando los conceptos aplicables, la normativa relevante y la solución razonada.\nResolución de dudas: Responde preguntas concretas sobre instituciones, procedimientos o régimen jurídico civil.\nComparaciones y esquemas: Compara figuras jurídicas, establece diferencias y similitudes, y elabora esquemas conceptuales cuando el usuario lo pida.\nPreguntas tipo examen: Genera preguntas de práctica, test o casos prácticos sobre cualquier tema del manual para que el usuario se autoevalúe.\nRepaso estructurado: Resume o repasa un tema concreto del manual de forma ordenada y didáctica.\nFLUJO DE RAZONAMIENTO OBLIGATORIO\nAnte cada mensaje del usuario sigue este flujo sin saltarte ningún paso:\n\n🔍 Buscar: Invoca supabase_vector_search con una query relevante basada en la consulta del usuario.\n📄 Leer: Analiza los fragmentos recuperados del manual.\n🧠 Razonar: Construye tu respuesta basándote en esos fragmentos. Si hay lagunas, complétalas con tu conocimiento general indicándolo explícitamente.\n💬 Responder: Formula una respuesta clara, estructurada y adaptada al formato Telegram.\nINSTRUCCIONES DE COMPORTAMIENTO\nResponde en el mismo idioma en el que el usuario te escribe.\nSé preciso y riguroso en los conceptos jurídicos. No inventes normativa, artículos o jurisprudencia que no estén en el manual o en tu conocimiento verificado.\nUsa un tono académico pero accesible: claro para estudiantes, pero suficientemente técnico para profesionales.\nCuando resuelvas ejercicios o supuestos prácticos, estructura tu respuesta así:\nIdentificación de los hechos relevantes\nConceptos e instituciones aplicables\nAnálisis jurídico\nConclusión\nSi la pregunta es ambigua o incompleta, pide aclaraciones antes de buscar y responder.\nSi el usuario pide algo fuera del ámbito del Derecho Civil, indícale amablemente que tu especialización es esa materia.\nMensajes muy largos en Telegram deben dividirse. Avisa al usuario: \"Te respondo en varias partes 👇\"\nLIMITACIONES\nNo das asesoramiento jurídico profesional vinculante. Si el usuario plantea un caso real con consecuencias legales, recuérdalo: \"Esta respuesta tiene fines académicos. Para un caso real, consulta a un abogado.\"\nTu fuente principal y prioritaria es el manual en Supabase. Si el manual no cubre un tema, puedes usar tu conocimiento general pero debes indicarlo con: \"Esta información no proviene del manual, sino de mi conocimiento general.\"\nMENSAJE DE BIENVENIDA\nCuando un usuario inicie la conversación o escriba /start, responde exactamente con:\n\n\"👋 ¡Hola! Soy LexCivil, tu asistente de Derecho Civil.\n\nTengo acceso al manual completo de la asignatura y lo consulto en cada respuesta para darte información precisa y fundamentada.\n\nPuedo ayudarte con:\n📚 Definición de conceptos\n✏️ Resolución de ejercicios y casos prácticos\n❓ Dudas sobre cualquier tema de Derecho Civil\n📝 Generación de preguntas de repaso\n\n¿Sobre qué tema quieres trabajar hoy?\"\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2656,
+        688
+      ],
+      "id": "51e81859-1b6c-4344-b67f-29de6f014f04",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4-turbo",
+          "mode": "list",
+          "cachedResultName": "gpt-4-turbo"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        2624,
+        896
+      ],
+      "id": "0dd4d1fa-56a7-4c64-81ee-9373e64cf1e6",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "=Úsalo siempre que el usuario haga preguntas sobre derecho civil, leyes, normativas, o pida generar exámenes y tareas. Esta herramienta busca en el Manual de Derecho Mercantil para encontrar el contexto legal exacto.\nEsta es la ÚNICA fuente de verdad permitida. Es obligatorio usar esta herramienta para CUALQUIER consulta del usuario, excepto para saludos simples.\"",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {
+          "queryName": "match_documents"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        2832,
+        896
+      ],
+      "id": "670a56ac-883b-4e85-8c45-71a994e3e5f4",
+      "name": "Supabase Vector Store1"
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-ada-002",
+        "options": {
+          "batchSize": 512,
+          "stripNewLines": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2848,
+        1088
+      ],
+      "id": "aa2885d9-ac7a-4a2b-8d28-f907d94a70ec",
+      "name": "Embeddings OpenAI1"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger1').first().json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3024,
+        688
+      ],
+      "id": "ee87eed3-76ff-41c3-98c0-7cae5e16dae5",
+      "name": "Send a text message",
+      "webhookId": "d4e2ab0a-cc6e-4942-9684-9fca0fdb2569"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.id }}",
+        "tableName": "n8n_chat_history",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        2736,
+        896
+      ],
+      "id": "11ee93b3-3e9f-4ec3-a13a-f53bb309b0d6",
+      "name": "Postgres Chat Memory"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1120,
+        816
+      ],
+      "id": "11f63f04-a45b-4bfe-aae9-4af2c8f4ea76",
+      "name": "Wait",
+      "webhookId": "8d1b5642-2628-45fa-a864-3337eaf8071d",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1abe193b-2069-4e14-9dde-62b4bdab8d25",
+              "leftValue": "={{ $json.message.last() }}",
+              "rightValue": "={{ $('Edit Fields3').item.json.mensaje }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1520,
+        816
+      ],
+      "id": "331b863d-49c6-40b0-bd78-04b54e99f783",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1abe193b-2069-4e14-9dde-62b4bdab8d25",
+              "leftValue": "={{ $json.message.last() }}",
+              "rightValue": "={{ $('Transcribe a recording1').item.json.text }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1888,
+        576
+      ],
+      "id": "472405dd-d939-4cdc-bab4-af32b2567a4b",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f59bbf9e-1611-404a-bae4-15aee72bac28",
+              "name": "message",
+              "value": "={{ $json.message.join(\" \") }}",
+              "type": "string"
+            },
+            {
+              "id": "1a7230ba-6e14-4447-922d-2fec2448f105",
+              "name": "id",
+              "value": "={{ $('Edit Fields3').item.json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2352,
+        576
+      ],
+      "id": "5e0fef1b-9fbd-46e1-b6cb-9619bba9f69a",
+      "name": "Edit Fields Audio"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f59bbf9e-1611-404a-bae4-15aee72bac28",
+              "name": "message",
+              "value": "={{ $json.message.join(\" \") }}",
+              "type": "string"
+            },
+            {
+              "id": "1a7230ba-6e14-4447-922d-2fec2448f105",
+              "name": "id",
+              "value": "={{ $('Edit Fields3').item.json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1984,
+        816
+      ],
+      "id": "e0c03f35-bcf6-462a-a79d-d0e28cc00b5a",
+      "name": "Edit Fields Texto"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        16,
+        688
+      ],
+      "id": "1818fe55-0b24-44be-a76c-7fcade748f7d",
+      "name": "Telegram Trigger1",
+      "webhookId": "7133eab1-ad87-43d9-96f8-f8046adb2caf"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1eadd7b7-9aff-43bc-9255-f34f3cab54dc",
+              "name": "id",
+              "value": "={{ $json.message.chat.id }}",
+              "type": "string"
+            },
+            {
+              "id": "d7631dbb-f8c8-4bfc-a305-a14a12799618",
+              "name": "mensaje",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "d5602578-1c52-4bdc-b3f0-78400aaaba0a",
+              "name": "tipo_mesaje",
+              "value": "={{ $json.message.voice ? \"audio\" : \"texto\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        256,
+        688
+      ],
+      "id": "c658a9dd-fa7a-4381-9131-6ae5f8efeaab",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0e6e67c8-f629-4522-bfe2-57f4c1d4591c",
+              "leftValue": "={{ $json.tipo_mesaje }}",
+              "rightValue": "audio",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        480,
+        688
+      ],
+      "id": "3660b4eb-7a8a-458a-a747-974f7adab5cd",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1088,
+        576
+      ],
+      "id": "97a6751e-fa44-4d72-adc8-5b6a344f7a83",
+      "name": "Transcribe a recording1"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('Edit Fields3').item.json.id }}",
+        "messageData": "={{ $('Edit Fields3').item.json.mensaje }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        912,
+        816
+      ],
+      "id": "5844b68b-8c07-4c56-bf0b-06308a3d6704",
+      "name": "Redis6"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "message",
+        "key": "={{ $('Edit Fields3').item.json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        816
+      ],
+      "id": "5e9ae990-911c-44d0-b376-75c36aa2dbbd",
+      "name": "Redis7"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('Edit Fields3').item.json.id }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        816
+      ],
+      "id": "a85314da-c070-465a-9eb3-6d5711ca0d8c",
+      "name": "Redis8"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('Edit Fields3').item.json.id }}",
+        "messageData": "={{ $json.text }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        576
+      ],
+      "id": "7bbe0b59-aceb-4180-bedc-f6f4f97649da",
+      "name": "Redis9"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1488,
+        576
+      ],
+      "id": "7fc5ab1c-b135-444d-b8ca-4cc0646c2a63",
+      "name": "Wait4",
+      "webhookId": "8d1b5642-2628-45fa-a864-3337eaf8071d"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "message",
+        "key": "={{ $('Edit Fields3').item.json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1696,
+        576
+      ],
+      "id": "ffdd9f3b-6c23-4190-8c06-2a88e4f80c9a",
+      "name": "Redis10"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('Edit Fields3').item.json.id }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        2128,
+        576
+      ],
+      "id": "8125dc4d-b4ee-4191-b7bb-0eca14b3d120",
+      "name": "Redis11"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Telegram Trigger1').item.json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        576
+      ],
+      "id": "053f4b9c-f1ca-43f5-80fa-7b56ec8d7309",
+      "name": "Get a file1",
+      "webhookId": "21d7f435-2852-48dc-9a08-dd083a2d8617"
+    },
+    {
+      "parameters": {
+        "url": "={{\"https://api.telegram.org/file/bot8172645878:AAE4ebV9Kixg_lH24roIzc4Lm3cHqCyJvn0/\" + $json.result.file_path}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        912,
+        576
+      ],
+      "id": "1f121753-3c63-4ed6-8cbc-839b2597b436",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.contenido }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        1696,
+        256
+      ],
+      "id": "8ee936fc-a5c5-46a3-893d-3854a99874a9",
+      "name": "Default Data Loader"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-29T17:57:52.288Z",
+      "createdAt": "2026-04-29T17:57:52.288Z",
+      "role": "workflow:owner",
+      "workflowId": "06MDe5CM1THdbuVj",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-29T17:58:37.113Z",
+  "versionId": "ee525094-e702-4c8d-90f9-5e836366d26b"
+}
