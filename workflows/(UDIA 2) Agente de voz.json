@@ -1,0 +1,258 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "comprobar_disponibilidad": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-30T09:03:40.886Z",
+  "id": "1vqrOYI1mNn3wEae",
+  "isArchived": false,
+  "meta": null,
+  "name": "(UDIA 2) Agente de voz",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b38e2cba-d328-4b20-a7d5-5a5cf105ca58",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4af69500-4472-46a9-8f5d-0af4571557bb",
+      "name": "Webhook",
+      "webhookId": "b38e2cba-d328-4b20-a7d5-5a5cf105ca58"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bb400946-4acb-4608-b79c-5344bd2c5dfb",
+              "name": "Fecha",
+              "value": "={{ $json.body.message.toolCallList[0].function.arguments.Fecha }}",
+              "type": "string"
+            },
+            {
+              "id": "d46fd36b-d67e-42cf-ac3a-b356dcf8fd3b",
+              "name": "Hora",
+              "value": "={{ $json.body.message.toolCallList[0].function.arguments.Hora }}",
+              "type": "string"
+            },
+            {
+              "id": "a4b0eb09-9dee-43b9-9e24-1fc0d79649dd",
+              "name": "Nombre",
+              "value": "={{ $json.body.message.toolCallList[0].function.arguments.Nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "15a0271d-dae8-4530-9262-c7fb7889ba4c",
+              "name": "Telefono",
+              "value": "={{ $json.body.message.toolCallList[0].function.arguments.Telefono }}",
+              "type": "string"
+            },
+            {
+              "id": "02803279-2194-493f-a538-60de46a83fa3",
+              "name": "Servicio",
+              "value": "={{ $json.body.message.toolCallList[0].function.arguments.Servicio }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "15618f76-3da3-4cae-86f8-41a029acc809",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "91c29a8f3421ee6ea2651fe17f231e59b3320a1935c8ffb4686b8b1888ed337c@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "Clinica "
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        800,
+        288
+      ],
+      "id": "ee62a358-df1e-4409-95f3-747fc4da8151",
+      "name": "comprobar_disponibilidad"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"results\":[\n      {\n           \"toolCallId\": \"{{ $('Webhook').item.json.body.message.toolCalls[0].id }}\",\n           \"result\": {{ JSON.stringify($json.output) }}\n      }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        912,
+        32
+      ],
+      "id": "175aaaad-bdbe-4fbb-97ff-cfa2074161f6",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Fecha a la que el cliente quiere agendar:  {{ $json.Fecha }}\n\nHora a la que el cliente quiere agendar:\n{{ $json.Hora }}\n\nNombre del cliente: {{ $json.Nombre }}\n\nTelefono del cliente: {{ $json.Telefono }}\n\nServicio a realizar: {{ $json.Servicio }}",
+        "options": {
+          "systemMessage": "=Eres un agente encargado de la agenda de una peluquería. Tu tarea es comprobar disponibilidades y agendar citas. \n\nLo primero que tienes que hacer es usar la tool comprobar_disponibilidad para obtener todos los eventos del calendario y compararlos con la fecha y hora a la qu eel cliente quiere reservar. Si no coincide ninguno, quiere decir que esa fecha y esa hora están disponibles.\n\nUna vez hayas comprobado la disponibilidad, si está disponible ejecuta la tool \"agendar\"\n\n\nLa fecha actual es {{$now}}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        416,
+        32
+      ],
+      "id": "4b2d6a99-59a9-4bd5-8029-6f9bd09aa079",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        288
+      ],
+      "id": "9eb6edfb-5801-4bf3-b251-a51d870af5b2",
+      "name": "OpenAI Chat Model1"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "91c29a8f3421ee6ea2651fe17f231e59b3320a1935c8ffb4686b8b1888ed337c@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "Clinica "
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        608,
+        320
+      ],
+      "id": "0857cd7f-5c0b-49fd-aaaf-a5f70298d56a",
+      "name": "agendar"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-30T09:03:40.893Z",
+      "createdAt": "2026-04-30T09:03:40.893Z",
+      "role": "workflow:owner",
+      "workflowId": "1vqrOYI1mNn3wEae",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-30T09:04:05.582Z",
+  "versionId": "ce845e6a-80d3-4ad0-80e3-24cc0ada13e7"
+}
