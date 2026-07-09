@@ -85,6 +85,7 @@
   "isArchived": false,
   "meta": null,
   "name": "(UDIA 2) Ejercicio data transformation",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
