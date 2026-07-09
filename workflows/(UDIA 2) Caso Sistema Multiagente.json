@@ -693,6 +693,7 @@
   "isArchived": false,
   "meta": null,
   "name": "(UDIA 2) Caso Sistema Multiagente",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
