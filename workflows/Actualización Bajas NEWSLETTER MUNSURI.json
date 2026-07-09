@@ -135,6 +135,7 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "system migration",
     "name": null,
     "description": null,
@@ -172,6 +173,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "Actualización Bajas NEWSLETTER MUNSURI",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
