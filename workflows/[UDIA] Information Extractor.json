@@ -33,6 +33,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] Information Extractor",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
