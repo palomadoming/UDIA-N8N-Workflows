@@ -55,6 +55,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] Agentes de IA de ejemplo",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
