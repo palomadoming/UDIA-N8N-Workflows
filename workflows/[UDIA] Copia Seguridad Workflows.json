@@ -458,6 +458,7 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "Paloma Dominguez",
     "name": "Version 5cc788a7",
     "description": "",
@@ -653,6 +654,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] Copia Seguridad Workflows",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {},
