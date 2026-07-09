@@ -267,6 +267,7 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "Paloma Dominguez",
     "name": "Version 228bb196",
     "description": "",
@@ -326,6 +327,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "Automatización De BAJAS - El Capitán",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
