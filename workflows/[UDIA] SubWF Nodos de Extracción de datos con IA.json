@@ -49,6 +49,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] SubWF Nodos de Extracción de datos con IA",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
