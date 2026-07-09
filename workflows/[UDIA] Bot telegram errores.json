@@ -22,6 +22,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] Bot telegram errores",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
