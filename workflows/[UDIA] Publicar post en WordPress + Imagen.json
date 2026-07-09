@@ -42,6 +42,7 @@
   "isArchived": false,
   "meta": null,
   "name": "[UDIA] Publicar post en WordPress + Imagen",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {},
