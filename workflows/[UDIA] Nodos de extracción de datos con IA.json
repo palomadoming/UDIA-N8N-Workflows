@@ -98,6 +98,7 @@
   "isArchived": false,
   "meta": null,
   "name": "[UDIA] Nodos de extracción de datos con IA",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {},
