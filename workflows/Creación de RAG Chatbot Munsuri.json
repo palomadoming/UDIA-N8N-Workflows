@@ -82,6 +82,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "Creación de RAG Chatbot Munsuri",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
