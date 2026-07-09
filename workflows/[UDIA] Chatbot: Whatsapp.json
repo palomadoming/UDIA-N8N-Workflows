@@ -97,6 +97,7 @@
   "isArchived": false,
   "meta": null,
   "name": "[UDIA] Chatbot: Whatsapp",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
