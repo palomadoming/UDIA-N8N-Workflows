@@ -769,6 +769,7 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "system migration",
     "name": null,
     "description": null,
@@ -993,6 +994,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "CONTENIDO MENSUAL NEWSLETTER MUNSURI",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -1563,11 +1565,19 @@
   ],
   "staticData": {
     "node:Schedule Trigger": {
-      "recurrenceRules": []
+      "recurrenceRules": [
+        null
+      ],
+      "recurrenceRuleSignatures": [
+        null
+      ]
     },
     "node:Schedule Trigger1": {
       "recurrenceRules": [
         280
+      ],
+      "recurrenceRuleSignatures": [
+        null
       ]
     }
   },
