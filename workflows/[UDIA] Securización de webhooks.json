@@ -10,6 +10,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] Securización de webhooks",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
