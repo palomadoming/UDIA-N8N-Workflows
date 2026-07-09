@@ -84,6 +84,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] Loops",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {},
