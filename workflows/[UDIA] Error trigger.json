@@ -55,6 +55,7 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "system migration",
     "name": null,
     "description": null,
@@ -81,6 +82,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] Error trigger",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
