@@ -974,6 +974,7 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "Paloma Dominguez",
     "name": "Version bc19461a",
     "description": "",
@@ -1191,6 +1192,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "Automatización El Capitán - Correo Inversores",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -1984,7 +1986,12 @@
       "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1iOdkZsFvbCmBdOxNWL5K0exruGIwGEZbKEajTLLcij0&revision=263&exportFormat=xlsx"
     },
     "node:Schedule Trigger": {
-      "recurrenceRules": []
+      "recurrenceRules": [
+        null
+      ],
+      "recurrenceRuleSignatures": [
+        null
+      ]
     }
   },
   "tags": [],
