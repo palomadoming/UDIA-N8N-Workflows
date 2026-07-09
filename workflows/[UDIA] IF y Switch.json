@@ -45,6 +45,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] IF y Switch",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
