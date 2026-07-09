@@ -32,6 +32,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "[UDIA] Credenciales",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {},
