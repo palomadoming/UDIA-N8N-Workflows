@@ -1,0 +1,203 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-11-08T18:05:37.614Z",
+  "id": "tFmsSAvSddCTM83M",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow",
+  "nodeGroups": [],
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                4
+              ],
+              "triggerAtHour": 11
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -224,
+        -160
+      ],
+      "id": "e71911f9-8df8-47f7-8679-9e41df718a69",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        0
+      ],
+      "id": "0b1e2343-fd24-4afc-b50e-0d00ee44b70e",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        80,
+        -176
+      ],
+      "id": "e148f546-7315-4558-853c-a9d698517f56",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7YQyRQTBLCW4Zrqb",
+          "name": "Google Sheets account 7"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U",
+          "mode": "list",
+          "cachedResultName": "Contenido Automatización - Cuaderno de Inventos - PINTEREST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "=SEMANA ACTUAL",
+              "lookupValue": "X"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6af4e5d3-5ee7-4dcb-b7e2-10d3de8c36aa",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZNlZio2Hc9aFqPLO",
+          "name": "Google Sheets account 8"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U",
+          "mode": "list",
+          "cachedResultName": "Contenido Automatización - Cuaderno de Inventos - PINTEREST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 605927676,
+          "mode": "list",
+          "cachedResultName": "Hoja 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit#gid=605927676"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "=SEMANA",
+              "lookupValue": "={{ $json.SEMANA }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "feda9a19-ccda-49e1-a20a-21cd658f67b1",
+      "name": "Get row(s) in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZNlZio2Hc9aFqPLO",
+          "name": "Google Sheets account 8"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-11-08T18:05:37.622Z",
+      "createdAt": "2026-11-08T18:05:37.622Z",
+      "role": "workflow:owner",
+      "workflowId": "tFmsSAvSddCTM83M",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-11-08T22:00:42.717Z",
+  "versionId": "7faa59a5-bf22-4ff7-9d07-75018aa8f62c"
+}
