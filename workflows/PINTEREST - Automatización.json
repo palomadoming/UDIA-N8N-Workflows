@@ -1,0 +1,866 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        []
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get row(s) in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Edit Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image": {
+      "main": [
+        [
+          {
+            "node": "Edit Image1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image1": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Message a model1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Edit Image2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image2": {
+      "main": [
+        [
+          {
+            "node": "Edit Image3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image3": {
+      "main": [
+        [
+          {
+            "node": "Edit Image4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image4": {
+      "main": [
+        [
+          {
+            "node": "Edit Image5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image5": {
+      "main": [
+        [
+          {
+            "node": "Edit Image6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image6": {
+      "main": [
+        [
+          {
+            "node": "Upload file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-11-08T18:05:37.614Z",
+  "id": "tFmsSAvSddCTM83M",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PINTEREST - Automatización",
+  "nodeGroups": [],
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                4
+              ],
+              "triggerAtHour": 11
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -224,
+        -160
+      ],
+      "id": "e71911f9-8df8-47f7-8679-9e41df718a69",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        0
+      ],
+      "id": "0b1e2343-fd24-4afc-b50e-0d00ee44b70e",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        80,
+        -176
+      ],
+      "id": "e148f546-7315-4558-853c-a9d698517f56",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7YQyRQTBLCW4Zrqb",
+          "name": "Google Sheets account 7"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U",
+          "mode": "list",
+          "cachedResultName": "Contenido Automatización - Cuaderno de Inventos - PINTEREST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "=SEMANA ACTUAL",
+              "lookupValue": "X"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6af4e5d3-5ee7-4dcb-b7e2-10d3de8c36aa",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZNlZio2Hc9aFqPLO",
+          "name": "Google Sheets account 8"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U",
+          "mode": "list",
+          "cachedResultName": "Contenido Automatización - Cuaderno de Inventos - PINTEREST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 605927676,
+          "mode": "list",
+          "cachedResultName": "Hoja 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit#gid=605927676"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "=SEMANA",
+              "lookupValue": "={{ $json.SEMANA }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "feda9a19-ccda-49e1-a20a-21cd658f67b1",
+      "name": "Get row(s) in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZNlZio2Hc9aFqPLO",
+          "name": "Google Sheets account 8"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Eres el creador de contenido educativo de Pequeños Inventores, una cuenta de Pinterest dirigida a familias con niños de 7 a 11 años.\n\nLa marca nace de la pasión de una estudiante de ingeniería por la ciencia, las matemáticas, la física, la creatividad y los inventos. Su propósito es despertar la curiosidad infantil y animar a los niños a desarrollar sus propias ideas.\n\nREGLAS:\n1. Escribe siempre en español de España, con un tono cercano, inspirador y claro.\n2. Respeta prioritariamente las instrucciones específicas de la semana recibidas del usuario.\n3. El texto principal debe ser breve, preferiblemente de 3 o 4 líneas.\n4. Utiliza datos científicos e históricos rigurosos. No inventes hechos, citas, biografías ni características de productos. Si un dato no puede considerarse suficientemente fiable, elige otro más seguro.\n5. No copies literalmente los ejemplos: utilízalos como referencia.\n6. Evita repetir ideas dentro de la misma publicación.\n7. Los títulos deben despertar curiosidad sin ser engañosos.\n8. Escribe el contenido de la imagen pensando en niños, y la descripción de Pinterest pensando en sus padres y educadores.\n9. Evita experimentos peligrosos o que requieran supervisión especializada.\n10. No añadas enlaces a Amazon salvo cuando la temática sea la promoción del cuaderno (semana 5).\n\nDevuelve exclusivamente un objeto JSON válido con estas claves: titulo_pin, texto_imagen, descripcion_pinterest y enfoque_visual. No añadas texto fuera del JSON."
+            },
+            {
+              "content": "=Genera una publicación original y educativa para Pinterest de la marca Pequeños Inventores.\n\nSEMANA:\n{{ $json.SEMANA }}\n\nTEMÁTICA:\n{{ $json['TEMÁTICA'] }}\n\nINSTRUCCIONES:\n{{ $json.PROMPT }}\n\nEJEMPLOS:\n{{ $json.EJEMPLOS }}\n\nGenera una publicación adecuada para familias con niños de 7 a 11 años.\n\nRespeta las indicaciones de la semana y utiliza los ejemplos como inspiración, sin copiarlos necesariamente.\n\nDevuelve exclusivamente un JSON válido con:\n{\n  \"titulo_pin\": \"...\",\n  \"texto_imagen\": \"...\",\n  \"descripcion_pinterest\": \"...\",\n  \"enfoque_visual\": \"...\"\n}\n\nREGLAS:\n- El título debe ser corto y atractivo, máximo 65 caracteres.\n- El texto educativo debe ser breve y claro.\n- La descripción de Pinterest puede desarrollar más la historia o curiosidad.\n- El enfoque visual debe describir una ilustración concreta relacionada con el contenido.\n- No inventes datos históricos o científicos.\n- No incluyas texto adicional fuera del JSON."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": null,
+          "textFormat": {
+            "textOptions": {
+              "type": "json_object"
+            }
+          },
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        688,
+        -96
+      ],
+      "id": "b4c6467c-db6e-4157-a06a-7d365b4cce3e",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "rdJzH5xVW8BGATek",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Get row(s) in sheet1').first().json.SEMANA }}",
+                    "rightValue": "=^SEMANA (1|2|4)$",
+                    "operator": {
+                      "type": "string",
+                      "operation": "regex"
+                    },
+                    "id": "2e24100e-c897-4c0a-8735-82d75880970a"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Imagen IA"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "284803a2-c5f3-4e2f-85d1-45048b62769f",
+                    "leftValue": "={{ $('Get row(s) in sheet1').first().json.SEMANA }}",
+                    "rightValue": "=^SEMANA (3|5)$",
+                    "operator": {
+                      "type": "string",
+                      "operation": "regex"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Imagen Drive"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        0
+      ],
+      "id": "12c2e596-af1b-4902-b684-0d098864c2cf",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-image-1-mini"
+        },
+        "prompt": "=Crea una ilustración vertical para una publicación educativa de Pinterest de la marca \"Pequeños Inventores\".\n\nTÍTULO DE LA PUBLICACIÓN:\n{{ $json.output[0].content[0].text.titulo_pin }}\n\nCONTENIDO:\n{{ $json.output[0].content[0].text.texto_imagen }}\n\nDESCRIPCIÓN VISUAL:\n{{ $json.output[0].content[0].text.enfoque_visual }}\n\nESTILO:\n- Ilustración educativa, creativa y visualmente atractiva.\n- Dirigida a familias con niños de 7 a 11 años.\n- Estilo moderno, alegre y profesional, sin parecer excesivamente infantil.\n- Colores vivos pero armoniosos.\n- Composición vertical adaptada a Pinterest.\n- Representar visualmente el tema de manera clara y reconocible.\n- Incluir elementos relacionados con la ingeniería, la ciencia, la creatividad o los inventos, cuando corresponda.\n- Mantener coherencia visual entre publicaciones de Pequeños Inventores.\n- Evitar marcas de agua, logotipos inventados y elementos decorativos innecesarios.\n\nIMPORTANTE:\nNo incluir textos, títulos ni palabras dentro de la imagen. Deja espacio libre en la parte superior para añadir el título posteriormente mediante una plantilla.",
+        "options": {
+          "quality": "medium",
+          "size": "1024x1536"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        1040,
+        -96
+      ],
+      "id": "7e227e12-d645-47a7-a255-1fd25f0c1f3b",
+      "name": "Generate an image",
+      "credentials": {
+        "openAiApi": {
+          "id": "rdJzH5xVW8BGATek",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Get row(s) in sheet1').first().json.SEMANA + ' - ' + $('Message a model').first().json.output[0].content[0].text.titulo_pin.replace(/[\\\\/:*?\"<>|]/g, '') + '.png' }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1hga-ibweH2OJVQ3eb0D-0sghaZAjWIAm",
+          "mode": "list",
+          "cachedResultName": "Imágenes generadas IA",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1hga-ibweH2OJVQ3eb0D-0sghaZAjWIAm"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1600,
+        -96
+      ],
+      "id": "51d5bf2f-9cfe-45ca-9c67-4d65ffd1a30d",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wiLRF9QPi18ANrOf",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "text": "={{ $('Message a model').first().json.output[0].content[0].text.titulo_pin }}",
+        "fontSize": 56,
+        "fontColor": "#17324C",
+        "positionX": 250,
+        "positionY": 95,
+        "lineLength": 24,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        1184,
+        -96
+      ],
+      "id": "8b540b83-fbe2-49d4-aea4-b8f479ca7096",
+      "name": "Edit Image"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "text": "PEQUEÑOS INVENTORES",
+        "fontSize": 30,
+        "fontColor": "#FFFFFF",
+        "positionX": 340,
+        "positionY": 1410,
+        "lineLength": 30,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        -96
+      ],
+      "id": "36e3d49e-c20c-401f-b140-34d8d930fe61",
+      "name": "Edit Image1"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.file_id }}",
+          "mode": "id"
+        },
+        "options": {
+          "binaryPropertyName": "data"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1200,
+        96
+      ],
+      "id": "dea01041-85c9-4615-8620-25263cf3d5ec",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "yBkQkYhgex9yTZyQ",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U",
+          "mode": "list",
+          "cachedResultName": "Contenido Automatización - Cuaderno de Inventos - PINTEREST",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1553047762,
+          "mode": "list",
+          "cachedResultName": "Hoja 3",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1wPLQZooimoFF-FGL8dfPG3igWme0Zgne1Qi6mtf2m8U/edit#gid=1553047762"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "=SEMANA",
+              "lookupValue": "={{ $('Get row(s) in sheet1').item.json.SEMANA }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        784,
+        192
+      ],
+      "id": "938fcd4f-4c7f-4cc0-8937-55a994b26237",
+      "name": "Get row(s) in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZNlZio2Hc9aFqPLO",
+          "name": "Google Sheets account 8"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nif (!items.length) {\n  throw new Error('No se han recibido recursos desde sheet3');\n}\n\n// Elegir 1 recurso al azar\nconst randomIndex = Math.floor(Math.random() * items.length);\nconst selected = items[randomIndex];\n\n// Obtener el campo donde está el enlace\nconst fileUrl = selected.json['FILE URL'] || selected.json['FILE ID'] || '';\n\n// Extraer el file_id desde una URL de Google Drive\nfunction extractFileId(url) {\n  if (!url) return '';\n  \n  const match1 = url.match(/\\/file\\/d\\/([^/]+)/);\n  if (match1) return match1[1];\n\n  const match2 = url.match(/[?&]id=([^&]+)/);\n  if (match2) return match2[1];\n\n  return '';\n}\n\nconst fileId = extractFileId(fileUrl);\n\nreturn [\n  {\n    json: {\n      ...selected.json,\n      recurso_seleccionado: selected.json.RECURSO,\n      file_url: fileUrl,\n      file_id: fileId,\n      total_opciones: items.length,\n      indice_seleccionado: randomIndex + 1\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        992,
+        192
+      ],
+      "id": "be410884-1f60-47a6-815a-bfeffcba341d",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Eres el creador de contenido educativo de Pequeños Inventores, una cuenta de Pinterest dirigida a familias con niños de 7 a 11 años.\n\nTu objetivo es recomendar recursos educativos interesantes o presentar Mi cuaderno de inventos.\n\nREGLAS:\n1. Escribe siempre en español de España.\n2. Utiliza un tono cercano, educativo, motivador y natural.\n3. Habla exclusivamente del recurso seleccionado.\n4. No inventes características, funcionalidades, precios, premios ni datos sobre productos.\n5. Prioriza las instrucciones específicas de la semana.\n6. Crea títulos breves, claros y atractivos.\n7. La descripción de Pinterest debe ser informativa y estar dirigida principalmente a padres y educadores.\n8. No incluyas afirmaciones comerciales engañosas.\n9. Para la semana 5, invita a descubrir el cuaderno de inventos en Amazon.\n10. Devuelve únicamente un objeto JSON válido.\n\nESTRUCTURA DE SALIDA:\n{\n  \"titulo_pin\": \"...\",\n  \"frase_imagen\": \"...\",\n  \"descripcion_pinterest\": \"...\",\n  \"recurso\": \"...\"\n}"
+            },
+            {
+              "content": "=Genera una publicación de Pinterest sobre el siguiente recurso:\n\nSEMANA:\n{{ $('Code in JavaScript').first().json.SEMANA }}\n\nRECURSO SELECCIONADO:\n{{ $('Code in JavaScript').first().json.recurso_seleccionado }}\n\nINSTRUCCIONES DE LA SEMANA:\n{{ $('Get row(s) in sheet2').first().json.PROMPT }}\n\nEJEMPLOS:\n{{ $('Get row(s) in sheet2').first().json.EJEMPLOS }}\n\nGenera:\n- titulo_pin: máximo 65 caracteres.\n- frase_imagen: máximo 12 palabras.\n- descripcion_pinterest: entre 50 y 90 palabras.\n- recurso: nombre del recurso seleccionado.\n\nSi es la SEMANA 5, añade esta URL de Amazon al final de descripcion_pinterest:\nhttps://www.amazon.es/dp/B0HNSYVJVK\n\nNo cambies el recurso seleccionado ni inventes características que no estén confirmadas."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "textFormat": {
+            "textOptions": {
+              "type": "json_object"
+            }
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        1216,
+        304
+      ],
+      "id": "1c700028-c07b-4fec-ac09-619b00289a3a",
+      "name": "Message a model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "rdJzH5xVW8BGATek",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1552,
+        192
+      ],
+      "id": "61c2107d-2b3f-4774-96c0-1384cfb90e55",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "resize",
+        "width": 850,
+        "height": 1050,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        192
+      ],
+      "id": "04dd96ca-bb6e-454d-97e9-3842e7c075d8",
+      "name": "Edit Image2"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "dataPropertyName": "fondo",
+        "backgroundColor": "#F8EDD7",
+        "width": 1024,
+        "height": 1536,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        1968,
+        192
+      ],
+      "id": "149f9760-0d55-470a-bb14-4713a359066d",
+      "name": "Edit Image3"
+    },
+    {
+      "parameters": {
+        "operation": "composite",
+        "dataPropertyName": "fondo",
+        "dataPropertyNameComposite": "data",
+        "positionX": 87,
+        "positionY": 260,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        2176,
+        192
+      ],
+      "id": "0fd7056a-4641-42d0-9b6d-0f2970155d98",
+      "name": "Edit Image4"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "dataPropertyName": "fondo",
+        "text": "={{ $('Message a model1').first().json.output[0].content[0].text.titulo_pin }}",
+        "fontSize": 46,
+        "fontColor": "#17324C",
+        "positionX": 160,
+        "positionY": 90,
+        "lineLength": 38,
+        "options": {
+          "font": "/usr/share/fonts/truetype/msttcorefonts/Georgia.ttf"
+        }
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        2384,
+        192
+      ],
+      "id": "410ae430-a5d7-4f75-bd13-b44f1393d8fe",
+      "name": "Edit Image5"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "dataPropertyName": "fondo",
+        "text": "PEQUEÑOS INVENTORES",
+        "fontSize": 38,
+        "fontColor": "#17324C",
+        "positionX": 300,
+        "positionY": 1430,
+        "lineLength": 30,
+        "options": {
+          "font": "/usr/share/fonts/truetype/msttcorefonts/Georgia.ttf"
+        }
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        2592,
+        192
+      ],
+      "id": "351643f9-f9d7-4e59-9ee1-ce740216a8e6",
+      "name": "Edit Image6"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "fondo",
+        "name": "={{ $('Code in JavaScript').first().json.SEMANA + ' - ' + $('Code in JavaScript').first().json.recurso_seleccionado.replace(/[\\\\/:*?\"<>|]/g, '') + ' - ' + $now.toFormat('yyyy-MM-dd_HHmmss') + '.png' }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1VQix1nyIqXAQUNV12t1CO6Hq7LZPmzdF",
+          "mode": "list",
+          "cachedResultName": "Publicaciones finales Pinterest",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1VQix1nyIqXAQUNV12t1CO6Hq7LZPmzdF"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2800,
+        192
+      ],
+      "id": "6bf5c5e0-18f2-4713-b8ad-b6b13ada712b",
+      "name": "Upload file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "yBkQkYhgex9yTZyQ",
+          "name": "Google Drive account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-11-08T18:05:37.622Z",
+      "createdAt": "2026-11-08T18:05:37.622Z",
+      "role": "workflow:owner",
+      "workflowId": "tFmsSAvSddCTM83M",
+      "projectId": "VtkoF2S7EHiBzxK5"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-11-09T22:00:08.629Z",
+  "versionId": "ddef3107-b45c-4ae5-ad56-14b4deffdc6a"
+}
