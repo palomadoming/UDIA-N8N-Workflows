@@ -206,6 +206,17 @@
           }
         ]
       ]
+    },
+    "Upload file1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-11-08T18:05:37.614Z",
@@ -841,6 +852,53 @@
           "name": "Google Drive account 2"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "22d10078-a91b-4d13-82b3-9420afb81fa2",
+              "name": "semana",
+              "value": "={{ $('Code in JavaScript').item.json.SEMANA }}",
+              "type": "string"
+            },
+            {
+              "id": "b4b6216d-77a3-48ec-8121-339af600a15f",
+              "name": "titulo_pin",
+              "value": "={{ $('Message a model1').item.json.output[0].content[0].text.titulo_pin }}",
+              "type": "string"
+            },
+            {
+              "id": "58fb5c07-6128-4ae0-8fa8-d9265d817f6a",
+              "name": "descripcion_pinterest",
+              "value": "={{ $('Message a model1').item.json.output[0].content[0].text.descripcion_pinterest }}",
+              "type": "string"
+            },
+            {
+              "id": "850ee906-13e9-4324-b962-9378687605f7",
+              "name": "drive_file_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "4eac2e4e-a7f1-483f-87b6-bce934eb5ca5",
+              "name": "url_destino",
+              "value": "={{ $('Code in JavaScript').first().json.SEMANA === 'SEMANA 5' ? 'https://www.amazon.es/dp/B0HNSYVJVK' : '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3008,
+        192
+      ],
+      "id": "940337fe-4c6d-45eb-a656-75a2762fd2d6",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -861,6 +919,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-11-09T22:00:08.629Z",
-  "versionId": "ddef3107-b45c-4ae5-ad56-14b4deffdc6a"
+  "updatedAt": "2026-11-10T22:22:56.963Z",
+  "versionId": "466f5778-c3b1-4af0-be6f-31abccada74f"
 }
